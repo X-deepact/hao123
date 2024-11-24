@@ -4,9 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H5 Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+      </script>
+      <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
 </head>
 <body>
-    <h5>This is an H5 heading</h5>
-    <p>Welcome to the H5 page!</p>
+<div class="container mx-auto px-4 ">
+<div class="flex items-center justify-start mt-4 mb-2 space-x-3">
+    <div class="flex justify-start items-top">
+    <div>
+        <img src="https://dgss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-09-27/297f5edb1e984613083a2d3cc0c5bb36.png" alt="logo" class="h-12">
+    </div>
+    <div class="flex border border-gray-300 rounded-lg h-7">
+        设为首页
+    </div>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"> Home </a> <br>
+        <a href="#" class="px-4"> About </a>
+    </div>
+    <div class="hover:bg-gray-200 hover:rounded">
+        <a href="#" class="px-4"><i class="hgi-stroke hgi-user-sharing"></i> 登录 </a> <br>
+        <div>&nbsp;</div>
+    </div>
+</div>
+</div>
+<header class="sticky top-0 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto p-4">
+        <div class="flex space-x-4 items-top justify-center">
+            <div class="logo ">
+                <img src="https://dss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/res/r/image/2021-3-4/hao123%20logo.png" alt="logo" class="h-12">
+            </div>
+            
+            <div class="px-4">
+                <div class="flex">
+                    <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">收起 
+                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                            <li>
+                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">网页</button>
+                            </li>
+                            <li>
+                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">贴吧</button>
+                            </li>
+                            <li>
+                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">知道</button>
+                            </li>
+                            <li>
+                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">图片</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="relative w-full">
+                        <input type="search" id="search-dropdown" class="block p-2.5 w-[320px] lg:w-[420px] z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates..." required />
+                        <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            百度一下
+                        </button>
+                    </div>
+                </div>
+             <div class="mt-2 flex flex flex-wrap space-x-2">
+                    <a href="#"  target="_blank">王楚钦谈与张本智和争冠 </a>
+                    <a href="#" target="_blank">前体操冠军做擦边女主播遭怒斥 </a>
+                    <a href="#"  target="_blank">王楚钦谈与张本智和争冠 </a>
+             </div>
+             <div class="mt-2 flex flex flex-wrap space-x-2">
+                <a href="#"  target="_blank">王楚钦谈与张本智和争冠 </a>
+                <a href="#" target="_blank">前体操冠军做擦边女主播遭怒斥 </a>
+                <a href="#"  target="_blank">王楚钦谈与张本智和争冠 </a>
+         </div>
+            </div>
+<div class="">
+    <a href="#">蒋凡归来 接管阿里5000亿命脉 </a>
+</div>
+<div class="">
+    <a href="#"> <i class="hgi-stroke hgi-refresh"></i> </a>
+</div>
+        </div>
+    </div>
+    
+</header>
+<div class="container flex items-center justify-around mx-auto px-4 bg-red-500 my-2 w-full border border-gray-200 p-2">
+ 
+ <a href="#" target="_blank">hao123推荐</a>
+ <a href="#" target="_blank">人民网</a>
+    <a href="#" target="_blank">新华网</a>
+    <a href="#" target="_blank">央视网</a>
+    <a href="#" target="_blank">国际在线</a>
+    <a href="#" target="_blank">中国日报</a>
+    <a href="#" target="_blank">中国网</a>
+    <a href="#" target="_blank">中经网</a>
+    <a href="#" target="_blank">光明网</a>
+    <a href="#" target="_blank">央广网</a>
+    <a href="#" target="_blank">中国青年网</a>
+    
+</div>
+
+<div class="container mx-auto px-4 bg-blue-500 mt-2 w-full border border-black">
+   Here <br/>
+   Here <br/>
+   Here <br/>
+   <hr>
+   One <br/>
+   Two <br/>
+</div>
+<div class="container mx-auto px-4 bg-pink-500 mb-2 w-full border border-black py-3">
+    Here logo link` <br/>
+   
+ </div>
+
+ <div class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3">
+   here long live<br/>
+   here long live<br/>
+   here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+    here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+     here long live<br/>
+   
+ </div>
+
+<div class="container mx-auto mx-4 mb-2 w-full border border-black py-3 grid grid-cols-12 gap-4">
+    <div class="col-span-3 bg-green-200">
+        <h2 class="text-xl font-semibold">tab1 | tab2 | tab3 | tab4</h2>
+        <p>some data</p>
+    </div>
+    <div class="col-span-9 bg-green-400">
+        <h2 class="text-xl font-semibold">
+            Tab 1 | Tab 2 | Tab 3 | Tab 4 | Tab5 | Tab6 | Tab 8 | Tab 9 | Tab 10 | Tab 11
+        </h2>
+        <p>Some text..</p>
+    </div>
+</div>
+
+<footer class="bg-gray-200 py-4">
+    <div class="container mx-auto">
+        <div class="flex items-center justify-between">
+            <p>&copy; 2021 My Website</p>
+            <p>Privacy Policy</p>
+        </div>
+    </div>
+</footer>
+
+
 </body>
 </html>

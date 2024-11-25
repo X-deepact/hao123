@@ -11,6 +11,7 @@ type Config struct {
 	DBPassword  string `mapstructure:"DB_PASSWORD"`
 	DBName      string `mapstructure:"DB_NAME"`
 	Source      string `mapstructure:"SOURCE"`
+	Environment string `mapstructure:"ENVIRONMENT"`
 }
 
 func LoadConfig(path string) (config Config, err error) {

@@ -18,3 +18,10 @@ func NewMongoStore(client *mongo.Client, queries Queries) Store {
 		Queries: queries,
 	}
 }
+
+func (ms *MongoStore) GetDatabase() *mongo.Database {
+	if mq, ok := ms.Queries.(*MongoQueries); ok {
+		return mq.DB
+	}
+	return nil
+}

@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"github.com/rs/zerolog/log"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -12,9 +13,9 @@ import (
 
 // MongoDB defines the database structure
 type MongoDB struct {
-	client   *mongo.Client
+	Client   *mongo.Client
 	Database *mongo.Database
-	config   util.Config
+	Config   util.Config
 }
 
 func retryConnect(uri, dbUsername, dbPassword, source string, maxRetries int) (*mongo.Client, error) {
@@ -51,15 +52,15 @@ func Connect(uri, dbName, dbUsername, dbPassword, source string, maxRetries int)
 	}
 
 	database := client.Database(dbName)
-	log.Info().Msg("Connected to MongoDB")
+	fmt.Println("Successfully connect to mongo database name:", database.Name())
 
 	return &MongoDB{
-		client:   client,
+		Client:   client,
 		Database: database,
 	}, nil
 }
 
 // Disconnect from DB
 func (mongo *MongoDB) Disconnect(db *MongoDB) error {
-	return mongo.client.Disconnect(context.Background())
+	return mongo.Client.Disconnect(context.Background())
 }

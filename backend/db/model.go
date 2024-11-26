@@ -5,33 +5,46 @@ import (
 	"time"
 )
 
+type SiteItems struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Name      string             `bson:"name" json:"name"`
+	Icon      string             `bson:"icon" json:"icon"`
+	Link      string             `bson:"link" json:"link"`
+	CreatedAt *time.Time         `bson:"createdAt" json:"createdAt"`
+	UpdatedAt *time.Time         `bson:"updatedAt" json:"updatedAt"`
+}
+
+type Item struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Name      string             `bson:"name" json:"name"`
+	URL       string             `bson:"url" json:"url"`                               // URL or link
+	Icon      *string            `bson:"icon,omitempty" json:"icon,omitempty"`         // Optional icon for the item
+	Category  *string            `bson:"category,omitempty" json:"category,omitempty"` // Optional category name
+	CreatedAt *time.Time         `bson:"createdAt" json:"createdAt"`
+	UpdatedAt *time.Time         `bson:"updatedAt" json:"updatedAt"`
+}
+
+type HostSearch struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Link      string             `bson:"link" json:"link"` // The URL
+	Title     string             `bson:"title" json:"title"`
+	CreatedAt *time.Time         `bson:"createdAt" json:"createdAt"`
+	UpdatedAt *time.Time         `bson:"updatedAt" json:"updatedAt"`
+}
+
 type Category struct {
-	ID          primitive.ObjectID `bson:"_id,omitempty"`
-	Name        string             `bson:"name"`                  // Name of the category
-	Description string             `bson:"description,omitempty"` // Optional: Description of the category
-	Icon        string             `bson:"icon,omitempty"`        // Optional: Icon URL or reference
-	CreatedAt   time.Time          `bson:"createdAt"`             // Creation timestamp
-	UpdatedAt   time.Time          `bson:"updatedAt"`             // Last updated timestamp
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"` // Unique identifier for the category
+	Name      string             `bson:"name" json:"name"`        // Name of the category
+	URL       string             `bson:"url" json:"url"`          // URL for the category
+	Items     []Item             `bson:"items" json:"items"`      // List of items under the category
+	CreatedAt *time.Time         `bson:"createdAt" json:"createdAt"`
+	UpdatedAt *time.Time         `bson:"updatedAt" json:"updatedAt"`
 }
 
-type Link struct {
-	ID         primitive.ObjectID `bson:"_id,omitempty"`
-	Name       string             `bson:"name"`               // Name of the link
-	URL        string             `bson:"url"`                // URL of the link
-	Icon       string             `bson:"icon,omitempty"`     // Optional: Icon URL or reference
-	CategoryID primitive.ObjectID `bson:"categoryId"`         // Foreign key reference to Category
-	Priority   int                `bson:"priority,omitempty"` // Optional: Sorting priority within a category
-	CreatedAt  time.Time          `bson:"createdAt"`          // Creation timestamp
-	UpdatedAt  time.Time          `bson:"updatedAt"`          // Last updated timestamp
-}
-
-type Advertisement struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty"`
-	Title     string             `bson:"title"`              // Title of the advertisement
-	ImageURL  string             `bson:"imageUrl"`           // URL or reference to the ad image
-	TargetURL string             `bson:"targetUrl"`          // URL the ad points to
-	Placement string             `bson:"placement"`          // Placement position (e.g., sidebar, footer)
-	Priority  int                `bson:"priority,omitempty"` // Priority for displaying the ad
-	CreatedAt time.Time          `bson:"createdAt"`          // Creation timestamp
-	UpdatedAt time.Time          `bson:"updatedAt"`          // Last updated timestamp
+type ItemCategories struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Name      string             `bson:"name" json:"name"` // Name of the category
+	URL       string             `bson:"url" json:"url"`   // URL for the category
+	CreatedAt *time.Time         `bson:"createdAt" json:"createdAt"`
+	UpdatedAt *time.Time         `bson:"updatedAt" json:"updatedAt"`
 }

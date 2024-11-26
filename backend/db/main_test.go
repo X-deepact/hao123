@@ -1,7 +1,6 @@
 package db
 
 import (
-	"context"
 	"hao123/util"
 	"log"
 	"os"
@@ -28,15 +27,15 @@ func TestMain(m *testing.M) {
 	}()
 
 	queries := NewMongoQueries(connect.Database)       // Pass only the database
-	testStore = NewMongoStore(connect.client, queries) // Initialize test store
+	testStore = NewMongoStore(connect.Client, queries) // Initialize test store
 
 	code := m.Run()
 
 	// Clean up the test database
-	err = connect.Database.Drop(context.Background())
-	if err != nil {
-		log.Printf("Failed to clean up test database: %v", err)
-	}
+	//err = connect.Database.Drop(context.Background())
+	//if err != nil {
+	//	log.Printf("Failed to clean up test database: %v", err)
+	//}
 
 	os.Exit(code)
 }

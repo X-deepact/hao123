@@ -6,12 +6,13 @@ import (
 )
 
 type Config struct {
-	DatabaseURL string `mapstructure:"DATABASE_URL"`
-	DBUsername  string `mapstructure:"DB_USERNAME"`
-	DBPassword  string `mapstructure:"DB_PASSWORD"`
-	DBName      string `mapstructure:"DB_NAME"`
-	Source      string `mapstructure:"SOURCE"`
-	Environment string `mapstructure:"ENVIRONMENT"`
+	DatabaseURL    string `mapstructure:"DATABASE_URL"`
+	DBUsername     string `mapstructure:"DB_USERNAME"`
+	DBPassword     string `mapstructure:"DB_PASSWORD"`
+	DBName         string `mapstructure:"DB_NAME"`
+	Source         string `mapstructure:"SOURCE"`
+	Environment    string `mapstructure:"ENVIRONMENT"`
+	HttpServerAddr string `mapstructure:"HTTP_SERVER_ADDR"`
 }
 
 func LoadConfig(path string) (config Config, err error) {

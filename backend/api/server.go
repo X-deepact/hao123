@@ -30,7 +30,14 @@ func NewServer(store db.Store, config util.Config) (*Server, error) {
 // Start return the HTTP api on a specific route
 func (s *Server) Start(address string) error {
 
-	return s.router.Run(address)
+	//return s.router.Run(address)
+	err := s.router.Run(address)
+
+	if err != nil {
+
+		return err
+	}
+	return nil
 
 }
 
@@ -38,12 +45,20 @@ func (s *Server) Start(address string) error {
 func (s *Server) setUpRouter() {
 	router := gin.Default()
 
+	err := router.SetTrustedProxies([]string{"127.0.0.1"}) // Replace with actual trusted IPs or ranges
+	if err != nil {
+		log.Fatal().Err(err).Msg("Failed to set trusted proxies")
+	}
 	if s.config.Environment == "development" {
 		router.Use(ginzerolog.Logger("GIN"))
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	}
 	//router.POST(util.CreateUser, s.createUser)
-
+	router.GET("/hotSearches", s.getAllHotSearch)
+	router.GET("/categories", s.getAllCategories)
+	router.GET("/items", s.getAllItem)
+	router.GET("/itemCategories", s.getAllItemCategories)
+	router.GET("/siteItem", s.getAllSiteItems)
 	s.router = router
 }
 

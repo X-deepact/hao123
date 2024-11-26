@@ -70,3 +70,86 @@ contentDiv.classList.add("hidden");
 showButton.classList.remove("hidden");
 });
 });
+
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        document.querySelectorAll('.accordion-content').forEach(item => {
+            if (item !== content) {
+                item.classList.add('hidden');
+            }
+        });
+        content.classList.toggle('hidden');
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".tab-button-2");
+    const tabContents = document.querySelectorAll(".tab-content-2");
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // Reset all tabs
+        tabButtons.forEach((btn) => {
+          btn.querySelector("span").classList.add("hidden");
+          btn.classList.remove("text-green-500");
+        });
+        tabContents.forEach((content) => content.classList.add("hidden"));
+
+        // Activate clicked tab
+        button.querySelector("span").classList.remove("hidden");
+        button.classList.add("text-green-500");
+        const tabId = button.getAttribute("data-tab");
+        document.getElementById(tabId).classList.remove("hidden");
+      });
+    });
+
+    // Activate the first tab by default
+    tabButtons[0].querySelector("span").classList.remove("hidden");
+    tabButtons[0].classList.add("text-green-500");
+    tabContents[0].classList.remove("hidden");
+  });
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".tab-button-3");
+    const tabContents = document.querySelectorAll(".tab-content-3");
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // Reset all tabs
+        tabButtons.forEach((btn) => {
+          btn.querySelector("span").classList.add("hidden");
+          btn.classList.remove("text-green-500");
+        });
+        tabContents.forEach((content) => content.classList.add("hidden"));
+
+        // Activate clicked tab
+        button.querySelector("span").classList.remove("hidden");
+        button.classList.add("text-green-500");
+        const tabId = button.getAttribute("data-tab");
+        document.getElementById(tabId).classList.remove("hidden");
+      });
+    });
+
+    // Activate the first tab by default
+    tabButtons[0].querySelector("span").classList.remove("hidden");
+    tabButtons[0].classList.add("text-green-500");
+    tabContents[0].classList.remove("hidden");
+  });
+
+
+  const slider = document.getElementById('slider');
+const slides = slider.children;
+let currentIndex = 0;
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+});

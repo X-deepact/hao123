@@ -25,6 +25,9 @@ type Queries interface {
 	GetAllSiteItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error)
 	AddSiteItem(ctx context.Context, collectionName string, siteItem *siteItemsParams) (*SiteItems, error)
 	AddManySiteItem(ctx context.Context, collectionName string, siteItems []*siteItemsParams) ([]*SiteItems, error)
+	GetAllCommonSiteItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error)
+	AddCommonSiteItem(ctx context.Context, collectionName string, commonSiteItem *commonSiteParams) (*CommonSite, error)
+	AddManyCommonSiteItem(ctx context.Context, collectionName string, commonSiteItems []*commonSiteParams) ([]*CommonSite, error)
 }
 
 type MongoQueries struct {

@@ -59,6 +59,7 @@ func (s *Server) setUpRouter() {
 	router.GET("/items", s.getAllItem)
 	router.GET("/itemCategories", s.getAllItemCategories)
 	router.GET("/siteItem", s.getAllSiteItems)
+	router.GET("/commonSiteItem", s.getAllCommonSiteItems)
 	s.router = router
 }
 

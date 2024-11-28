@@ -2,6 +2,7 @@ package api
 
 import (
 	ginzerolog "github.com/dn365/gin-zerolog"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

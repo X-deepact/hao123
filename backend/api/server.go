@@ -45,6 +45,14 @@ func (s *Server) Start(address string) error {
 func (s *Server) setUpRouter() {
 	router := gin.Default()
 
+	corsConfig := cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"}, // Replace with your frontend's origin
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowCredentials: true,
+	}
+	router.Use(cors.New(corsConfig))
+
 	err := router.SetTrustedProxies([]string{"127.0.0.1"}) // Replace with actual trusted IPs or ranges
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to set trusted proxies")

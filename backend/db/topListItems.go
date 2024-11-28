@@ -10,16 +10,13 @@ import (
 	"time"
 )
 
-//same with siteItem
-
-type commonSiteParams struct {
-	Name string `bson:"name" json:"name"`
-	Icon string `bson:"icon" json:"icon"`
-	Url  string `bson:"url" json:"url"`
+type topListItemParams struct {
+	Url         string `bson:"url" json:"url"`
+	Name        string `bson:"name" json:"name"`
+	TopListName string `bson:"topListName" json:"topListName"`
 }
 
-func (mq *MongoQueries) GetAllCommonSiteItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
-	// Default filter to empty (matches all documents) if no filter is provided
+func (mq *MongoQueries) GetAllTopListItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
 	if filter == nil {
 		filter = bson.M{}
 	}
@@ -48,24 +45,21 @@ func (mq *MongoQueries) GetAllCommonSiteItem(ctx context.Context, collectionName
 	})
 
 	return results, err
-
 }
-
-func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName string, commonSiteItem *commonSiteParams) (*CommonSite, error) {
-	// Validate input
-	if commonSiteItem.Name == "" || commonSiteItem.Url == "" {
-		return nil, errors.New("name  URL must be provided")
+func (mq *MongoQueries) AddTopListItem(ctx context.Context, collectionName string, topListItem *topListItemParams) (*TopListItem, error) {
+	if topListItem.Url == "" || topListItem.TopListName == "" {
+		return nil, errors.New("name, URL and TopListName must be provided")
 	}
 
 	// Define a filter to check for existing documents
 	filter := bson.M{
 		"$or": []bson.M{
-			{"name": commonSiteItem.Name},
-			{"url": commonSiteItem.Url},
+			{"name": topListItem.Name},
+			{"url": topListItem.Url},
+			{"topListName": topListItem.TopListName},
 		},
 	}
 
-	// Check for duplicates
 	err := mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
 
 		count, err := collection.CountDocuments(ctx, filter)
@@ -73,7 +67,7 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 			return fmt.Errorf("failed to check unique constraint: %v", err)
 		}
 		if count > 0 {
-			return errors.New("siteItem with the same name or URL already exists")
+			return errors.New("feed Title with the same name or URL already exists")
 		}
 		return nil
 	})
@@ -83,11 +77,11 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 
 	// Prepare the new document
 
-	newSiteItems := &CommonSite{
-		ID:   primitive.NewObjectID(),
-		Name: commonSiteItem.Name,
-		Icon: commonSiteItem.Icon,
-		Url:  commonSiteItem.Url,
+	newTopListItem := &TopListItem{
+		ID:          primitive.NewObjectID(),
+		Name:        topListItem.Name,
+		TopListName: topListItem.TopListName,
+		Url:         topListItem.Url,
 		CreatedAt: func() *time.Time {
 			now := time.Now()
 			return &now
@@ -97,12 +91,12 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 			return &now
 		}(),
 	}
-	
+
 	// Insert the document
 	err = mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
-		result, err := collection.InsertOne(ctx, newSiteItems)
+		result, err := collection.InsertOne(ctx, newTopListItem)
 		if err == nil {
-			newSiteItems.ID = result.InsertedID.(primitive.ObjectID)
+			newTopListItem.ID = result.InsertedID.(primitive.ObjectID)
 		}
 		return err
 	})
@@ -110,32 +104,29 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 		return nil, fmt.Errorf("failed to insert site items: %v", err)
 	}
 
-	return newSiteItems, nil
-
+	return newTopListItem, nil
 }
-
-func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionName string, commonSiteItems []*commonSiteParams) ([]*CommonSite, error) {
-	// Validate input
-	if len(commonSiteItems) == 0 {
+func (mq *MongoQueries) AddManyTopListItem(ctx context.Context, collectionName string, topListItems []*topListItemParams) ([]*TopListItem, error) {
+	if len(topListItems) == 0 {
 		return nil, errors.New("no common site Items provided to insert")
 	}
 
 	// Prepare documents for insertion
 
 	var docs []interface{}
-	var resultDocs []*CommonSite
+	var resultDocs []*TopListItem
 
-	for _, commonSiteItem := range commonSiteItems {
+	for _, topList := range topListItems {
 		// Validate fields
-		if commonSiteItem.Name == "" || commonSiteItem.Url == "" {
-			return nil, errors.New("name and  URL must be provided")
+		if topList.Url == "" || topList.TopListName == "" {
+			return nil, errors.New("name, URL and TopListName must be provided")
 		}
 
-		newSiteItem := &CommonSite{
-			ID:   primitive.NewObjectID(),
-			Name: commonSiteItem.Name,
-			Icon: commonSiteItem.Icon,
-			Url:  commonSiteItem.Url,
+		newTopList := &TopListItem{
+			ID:          primitive.NewObjectID(),
+			Name:        topList.Name,
+			TopListName: topList.TopListName,
+			Url:         topList.Url,
 			CreatedAt: func() *time.Time {
 				now := time.Now()
 				return &now
@@ -146,18 +137,16 @@ func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionNam
 			}(),
 		}
 
-		docs = append(docs, newSiteItem)
-		resultDocs = append(resultDocs, newSiteItem)
+		docs = append(docs, newTopList)
+		resultDocs = append(resultDocs, newTopList)
 	}
-
-	// Insert the documents
 	err := mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
 		_, err := collection.InsertMany(ctx, docs)
 		return err
 	})
 
 	if err != nil {
-		return nil, fmt.Errorf("failed to insert site Items: %v", err)
+		return nil, fmt.Errorf("failed to insert Top List Items: %v", err)
 	}
 
 	return resultDocs, nil

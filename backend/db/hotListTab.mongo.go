@@ -10,16 +10,12 @@ import (
 	"time"
 )
 
-//same with siteItem
-
-type commonSiteParams struct {
-	Name string `bson:"name" json:"name"`
-	Icon string `bson:"icon" json:"icon"`
+type hotTabParams struct {
 	Url  string `bson:"url" json:"url"`
+	Name string `bson:"name" json:"name"`
 }
 
-func (mq *MongoQueries) GetAllCommonSiteItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
-	// Default filter to empty (matches all documents) if no filter is provided
+func (mq *MongoQueries) GetAllHotTab(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
 	if filter == nil {
 		filter = bson.M{}
 	}
@@ -48,20 +44,18 @@ func (mq *MongoQueries) GetAllCommonSiteItem(ctx context.Context, collectionName
 	})
 
 	return results, err
-
 }
 
-func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName string, commonSiteItem *commonSiteParams) (*CommonSite, error) {
-	// Validate input
-	if commonSiteItem.Name == "" || commonSiteItem.Url == "" {
-		return nil, errors.New("name  URL must be provided")
+func (mq *MongoQueries) AddHotTab(ctx context.Context, collectionName string, hotTab *hotTabParams) (*HotListTab, error) {
+	if hotTab.Url == "" || hotTab.Name == "" {
+		return nil, errors.New("name and URL must be provided")
 	}
 
 	// Define a filter to check for existing documents
 	filter := bson.M{
 		"$or": []bson.M{
-			{"name": commonSiteItem.Name},
-			{"url": commonSiteItem.Url},
+			{"name": hotTab.Name},
+			{"url": hotTab.Url},
 		},
 	}
 
@@ -73,7 +67,7 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 			return fmt.Errorf("failed to check unique constraint: %v", err)
 		}
 		if count > 0 {
-			return errors.New("siteItem with the same name or URL already exists")
+			return errors.New("gov Title with the same name or URL already exists")
 		}
 		return nil
 	})
@@ -83,11 +77,10 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 
 	// Prepare the new document
 
-	newSiteItems := &CommonSite{
+	hotListsTab := &HotListTab{
 		ID:   primitive.NewObjectID(),
-		Name: commonSiteItem.Name,
-		Icon: commonSiteItem.Icon,
-		Url:  commonSiteItem.Url,
+		Name: hotTab.Name,
+		Url:  hotTab.Url,
 		CreatedAt: func() *time.Time {
 			now := time.Now()
 			return &now
@@ -97,12 +90,12 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 			return &now
 		}(),
 	}
-	
+
 	// Insert the document
 	err = mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
-		result, err := collection.InsertOne(ctx, newSiteItems)
+		result, err := collection.InsertOne(ctx, hotListsTab)
 		if err == nil {
-			newSiteItems.ID = result.InsertedID.(primitive.ObjectID)
+			hotListsTab.ID = result.InsertedID.(primitive.ObjectID)
 		}
 		return err
 	})
@@ -110,32 +103,30 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 		return nil, fmt.Errorf("failed to insert site items: %v", err)
 	}
 
-	return newSiteItems, nil
-
+	return hotListsTab, nil
 }
 
-func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionName string, commonSiteItems []*commonSiteParams) ([]*CommonSite, error) {
+func (mq *MongoQueries) AddManyHotTab(ctx context.Context, collectionName string, hotTab []*hotTabParams) ([]*HotListTab, error) {
 	// Validate input
-	if len(commonSiteItems) == 0 {
-		return nil, errors.New("no common site Items provided to insert")
+	if len(hotTab) == 0 {
+		return nil, errors.New("no common gov sites provided to insert")
 	}
 
 	// Prepare documents for insertion
 
 	var docs []interface{}
-	var resultDocs []*CommonSite
+	var resultDocs []*HotListTab
 
-	for _, commonSiteItem := range commonSiteItems {
+	for _, tab := range hotTab {
 		// Validate fields
-		if commonSiteItem.Name == "" || commonSiteItem.Url == "" {
-			return nil, errors.New("name and  URL must be provided")
+		if tab.Name == "" || tab.Url == "" {
+			return nil, errors.New("name and URL must be provided")
 		}
 
-		newSiteItem := &CommonSite{
+		newFeedItem := &HotListTab{
 			ID:   primitive.NewObjectID(),
-			Name: commonSiteItem.Name,
-			Icon: commonSiteItem.Icon,
-			Url:  commonSiteItem.Url,
+			Name: tab.Name,
+			Url:  tab.Url,
 			CreatedAt: func() *time.Time {
 				now := time.Now()
 				return &now
@@ -146,8 +137,8 @@ func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionNam
 			}(),
 		}
 
-		docs = append(docs, newSiteItem)
-		resultDocs = append(resultDocs, newSiteItem)
+		docs = append(docs, newFeedItem)
+		resultDocs = append(resultDocs, newFeedItem)
 	}
 
 	// Insert the documents
@@ -157,7 +148,7 @@ func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionNam
 	})
 
 	if err != nil {
-		return nil, fmt.Errorf("failed to insert site Items: %v", err)
+		return nil, fmt.Errorf("failed to insert hot tab: %v", err)
 	}
 
 	return resultDocs, nil

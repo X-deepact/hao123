@@ -60,6 +60,12 @@ func (s *Server) setUpRouter() {
 	router.GET("/itemCategories", s.getAllItemCategories)
 	router.GET("/siteItem", s.getAllSiteItems)
 	router.GET("/commonSiteItem", s.getAllCommonSiteItems)
+	router.GET("/topNews", s.getAllTopNews)
+	router.GET("/govSites", s.getAllGovSites)
+	router.GET("/hotList", s.getAllHotList)
+	router.GET("/hotTab", s.getAllHotTabs)
+	router.GET("/topListItems", s.getAllTopListItems)
+	router.GET("/topList", s.getAllTopList)
 	s.router = router
 }
 

@@ -10,16 +10,12 @@ import (
 	"time"
 )
 
-//same with siteItem
-
-type commonSiteParams struct {
-	Name string `bson:"name" json:"name"`
-	Icon string `bson:"icon" json:"icon"`
+type govSitesParams struct {
 	Url  string `bson:"url" json:"url"`
+	Name string `bson:"name" json:"name"`
 }
 
-func (mq *MongoQueries) GetAllCommonSiteItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
-	// Default filter to empty (matches all documents) if no filter is provided
+func (mq *MongoQueries) GetAllGovSites(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
 	if filter == nil {
 		filter = bson.M{}
 	}
@@ -48,20 +44,18 @@ func (mq *MongoQueries) GetAllCommonSiteItem(ctx context.Context, collectionName
 	})
 
 	return results, err
-
 }
 
-func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName string, commonSiteItem *commonSiteParams) (*CommonSite, error) {
-	// Validate input
-	if commonSiteItem.Name == "" || commonSiteItem.Url == "" {
-		return nil, errors.New("name  URL must be provided")
+func (mq *MongoQueries) AddGovSite(ctx context.Context, collectionName string, govSites *govSitesParams) (*GovSites, error) {
+	if govSites.Url == "" || govSites.Name == "" {
+		return nil, errors.New("name and URL must be provided")
 	}
 
 	// Define a filter to check for existing documents
 	filter := bson.M{
 		"$or": []bson.M{
-			{"name": commonSiteItem.Name},
-			{"url": commonSiteItem.Url},
+			{"name": govSites.Name},
+			{"url": govSites.Url},
 		},
 	}
 
@@ -73,7 +67,7 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 			return fmt.Errorf("failed to check unique constraint: %v", err)
 		}
 		if count > 0 {
-			return errors.New("siteItem with the same name or URL already exists")
+			return errors.New("gov Title with the same name or URL already exists")
 		}
 		return nil
 	})
@@ -83,11 +77,10 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 
 	// Prepare the new document
 
-	newSiteItems := &CommonSite{
+	newGovSites := &GovSites{
 		ID:   primitive.NewObjectID(),
-		Name: commonSiteItem.Name,
-		Icon: commonSiteItem.Icon,
-		Url:  commonSiteItem.Url,
+		Name: govSites.Name,
+		Url:  govSites.Url,
 		CreatedAt: func() *time.Time {
 			now := time.Now()
 			return &now
@@ -97,12 +90,12 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 			return &now
 		}(),
 	}
-	
+
 	// Insert the document
 	err = mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
-		result, err := collection.InsertOne(ctx, newSiteItems)
+		result, err := collection.InsertOne(ctx, newGovSites)
 		if err == nil {
-			newSiteItems.ID = result.InsertedID.(primitive.ObjectID)
+			newGovSites.ID = result.InsertedID.(primitive.ObjectID)
 		}
 		return err
 	})
@@ -110,32 +103,30 @@ func (mq *MongoQueries) AddCommonSiteItem(ctx context.Context, collectionName st
 		return nil, fmt.Errorf("failed to insert site items: %v", err)
 	}
 
-	return newSiteItems, nil
-
+	return newGovSites, nil
 }
 
-func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionName string, commonSiteItems []*commonSiteParams) ([]*CommonSite, error) {
+func (mq *MongoQueries) AddManyGovSites(ctx context.Context, collectionName string, govSites []*govSitesParams) ([]*GovSites, error) {
 	// Validate input
-	if len(commonSiteItems) == 0 {
-		return nil, errors.New("no common site Items provided to insert")
+	if len(govSites) == 0 {
+		return nil, errors.New("no common gov sites provided to insert")
 	}
 
 	// Prepare documents for insertion
 
 	var docs []interface{}
-	var resultDocs []*CommonSite
+	var resultDocs []*GovSites
 
-	for _, commonSiteItem := range commonSiteItems {
+	for _, govSite := range govSites {
 		// Validate fields
-		if commonSiteItem.Name == "" || commonSiteItem.Url == "" {
-			return nil, errors.New("name and  URL must be provided")
+		if govSite.Name == "" || govSite.Url == "" {
+			return nil, errors.New("name and URL must be provided")
 		}
 
-		newSiteItem := &CommonSite{
+		newFeedItem := &GovSites{
 			ID:   primitive.NewObjectID(),
-			Name: commonSiteItem.Name,
-			Icon: commonSiteItem.Icon,
-			Url:  commonSiteItem.Url,
+			Name: govSite.Name,
+			Url:  govSite.Url,
 			CreatedAt: func() *time.Time {
 				now := time.Now()
 				return &now
@@ -146,8 +137,8 @@ func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionNam
 			}(),
 		}
 
-		docs = append(docs, newSiteItem)
-		resultDocs = append(resultDocs, newSiteItem)
+		docs = append(docs, newFeedItem)
+		resultDocs = append(resultDocs, newFeedItem)
 	}
 
 	// Insert the documents
@@ -157,7 +148,7 @@ func (mq *MongoQueries) AddManyCommonSiteItem(ctx context.Context, collectionNam
 	})
 
 	if err != nil {
-		return nil, fmt.Errorf("failed to insert site Items: %v", err)
+		return nil, fmt.Errorf("failed to insert govSites: %v", err)
 	}
 
 	return resultDocs, nil

@@ -13,6 +13,7 @@ import { HotListItemService } from '../services/hot-list-item.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  isLongContentHidden = true;
 
   categories: any[] = [];
   siteItems: any[] = [];
@@ -37,6 +38,11 @@ export class DashboardComponent {
     this.fetchHotList(1,10);
     this.fetchHotListItem(1,10);
   }
+ // Togogle show/off long content
+  toggleLongContent(): void {
+    this.isLongContentHidden = !this.isLongContentHidden;
+  }
+
 
   // Categories
   fetchCategories(pageId: number, pageSize: number): void {

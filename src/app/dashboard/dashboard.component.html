@@ -231,7 +231,7 @@
   <div class="container mx-auto p-4 w-full border border-[#DEE3EB] mt-3">
     
     <!-- stie Items -->
-     <div *ngIf="siteItems?.length; else noItems">
+    <div *ngIf="siteItems?.length; else noItems">
     <div *ngFor="let item of siteItems" class="site-item">
       <a [href]="item.link" target="_blank" rel="noopener noreferrer">
         <img [src]="item.icon" [alt]="item.name" class="site-icon" />
@@ -538,7 +538,7 @@
       登录后将保留您的设置，便于您在其他地方查看
   
       <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded h-8">
-        登录
+        登录 SHOW MROE
       </button>
     </div>
     <div class="grid grid-cols-9 gap-4 items-center mt-2">
@@ -685,12 +685,13 @@
       <!-- Site 2 -->
     </div>
     <div class="flex justify-center items-center mt-2">
-      <a href="#" id="showButton"> 点击展开 <i class="hgi-stroke hgi-arrow-down-01"></i></a>
+      <button id="showButton"  *ngIf="isLongContentHidden" id="showButton" (click)="toggleLongContent()"> 点击展开  show button<i class="hgi-stroke hgi-arrow-down-01"></i></button>
     </div>
   </div>
   
   
-  <div id="contentDiv" class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3 hidden">
+  <div class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3" 
+     [class.hidden]="isLongContentHidden">
     <div class="grid grid-cols-12 gap-4 items-center">
       <a href="#" class="linkLongFirst">视频</a>
       <a href="" class="">好看视频</a>
@@ -735,7 +736,7 @@
     lot of website list are here<br />
     lot of website list are here<br />
     <div class="flex items-center justify-center">
-      <a href="#" id="hideButton"> 点击收起 <i class="hgi-stroke hgi-arrow-up-01"></i></a>
+      <a href="#"  *ngIf="!isLongContentHidden" id="hideButton" (click)="toggleLongContent()"> 点击收起 <i class="hgi-stroke hgi-arrow-up-01"></i></a>
     </div>
   </div>
   

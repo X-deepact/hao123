@@ -25,6 +25,9 @@ type Queries interface {
 	GetAllSiteItem(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error)
 	AddSiteItem(ctx context.Context, collectionName string, siteItem *siteItemsParams) (*SiteItems, error)
 	AddManySiteItem(ctx context.Context, collectionName string, siteItems []*siteItemsParams) ([]*SiteItems, error)
+	GetAllFeedTitles(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error)
+	AddFeedTitle(ctx context.Context, collectionName string, feedTitle *FeedTitleParams) (*FeedTitle, error)
+	AddManyFeedTitles(ctx context.Context, collectionName string, feedTitles []*FeedTitleParams) ([]*FeedTitle, error)
 }
 
 type MongoQueries struct {

@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createAddCategory(t *testing.T) *Category {
@@ -36,7 +37,8 @@ func createAddCategory(t *testing.T) *Category {
 }
 
 func TestAddCategory(t *testing.T) {
-	createAddCategory(t)
+	// createAddCategory(t)
+	TestAddManyCategory(t)
 }
 
 func TestGetAllCategory(t *testing.T) {

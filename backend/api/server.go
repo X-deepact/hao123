@@ -1,14 +1,15 @@
 package api
 
 import (
+	"hao123/db"
+	"hao123/util"
+	"os"
+
 	ginzerolog "github.com/dn365/gin-zerolog"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"hao123/db"
-	"hao123/util"
-	"os"
 )
 
 type Server struct {
@@ -47,7 +48,7 @@ func (s *Server) setUpRouter() {
 	router := gin.Default()
 
 	corsConfig := cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"}, // Replace with your frontend's origin
+		AllowOrigins:     []string{"http://localhost:4200"}, // Replace with your frontend's origin
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		AllowCredentials: true,

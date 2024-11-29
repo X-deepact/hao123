@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createGovSites(t *testing.T) *GovSites {
@@ -25,7 +26,8 @@ func createGovSites(t *testing.T) *GovSites {
 }
 
 func TestAddGovSite(t *testing.T) {
-	createGovSites(t)
+	// createGovSites(t)
+	TestAddManyGovSites(t)
 }
 
 func TestGetAllGovSites(t *testing.T) {

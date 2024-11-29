@@ -13,7 +13,9 @@ import { CategoryTabService } from '../services/categorytab.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+
   isVisible: boolean = false; // Initially, the div is hidden
+
 
   toggleVisibility(): void {
     this.isVisible = !this.isVisible; // Toggle the visibility state
@@ -26,6 +28,7 @@ export class DashboardComponent {
   hotLists: any[] = [];
   hotListItems: any[] = [];
 
+
   constructor(
     private categoryService: CategoryService,
     private siteItemService: SiteItemsService,
@@ -34,6 +37,7 @@ export class DashboardComponent {
     private HotListService: HotListService,
     private HotListItemService: HotListItemService,
     private CategoryTabService: CategoryTabService
+
   ) {}
   ngOnInit(): void {
     this.fetchCategories(1, 10);
@@ -44,12 +48,18 @@ export class DashboardComponent {
     this.fetchHotList(1, 10);
     this.fetchHotListItem(1, 10);
   }
+ // Togogle show/off long content
+  toggleLongContent(): void {
+    this.isLongContentHidden = !this.isLongContentHidden;
+  }
+
 
   // Categories
   fetchCategories(pageId: number, pageSize: number): void {
     this.categoryService.getCategories(pageId, pageSize).subscribe(
       (data) => {
         this.categories = data.categories;
+        console.log("asdfsadfsdfsdfasd")
       },
       (error) => {
         console.error('Error fetching categories:', error);

@@ -11,7 +11,7 @@
 
 
 
-<!-- 
+<!--
   <div *ngIf="commonSiteItems && commonSiteItems.length">
     <ul>
       <li *ngFor="let site of commonSiteItems">
@@ -40,27 +40,27 @@
     <a [href]="item.url" target="_blank">More Details</a>
   </div> -->
 
-  
+
   <!-- <div *ngFor="let item of hotListItems.hotList" class="hotlist-item">
     <h3 *ngIf="item.name">{{ item.name }}</h3>
     <img *ngIf="item.imageLink" [src]="item.imageLink" alt="{{ item.name }}" class="hotlist-image" />
-    
+
     <div *ngIf="item.infoTexts.length">
       <p *ngFor="let info of item.infoTexts">
         {{ info }}
       </p>
     </div>
-  
+
     <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer">
       Learn more
     </a>
   </div>
-  
-  
+
+
   <div *ngIf="hotListItems && hotListItems.length === 0">
     <p>No items available.</p>
   </div> -->
-  
+
   <div class="relative">
     <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728439862186/6c150c9d16f2.jpg" alt="banner"
       class="w-full" />
@@ -112,7 +112,7 @@
           <a href="#" class="px-4 line-item">网盘 </a>
           <a href="#" class="px-4 line-item">辟谣 </a>
         </div>
-  
+
       </div>
       <div class="hover:bg-gray-200 hover:rounded flex items-center">
         <a href="#"><i class="hgi-stroke hgi-user-sharing"></i> 登录
@@ -127,7 +127,7 @@
           <img src="https://dss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/res/r/image/2021-3-4/hao123%20logo.png" alt="logo"
             class="h-12" />
         </div>
-  
+
         <div class="px-4">
           <div class="flex">
             <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
@@ -202,22 +202,22 @@
     </div>
   </header>
   <div class="container flex items-center justify-around mx-auto px-4  my-2 w-full border border-gray-200 p-2">
- 
+
     <div *ngIf="govSites && govSites.length; else noData" class="govSites">
-      
+
         <a *ngFor="let site of govSites">
           <div >
             <a class="govSites" style="margin-left: 26px; margin-right: 26px;" [href]="site.url" target="_blank">{{ site.name }}</a>
           </div>
         </a>
-      
+
     </div>
-    
+
     <ng-template #noData>
       <p>No government sites available.</p>
     </ng-template>
   </div>
-  
+
   <div class="container flex justify-between items-center  mx-auto">
     <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721416180/ce719dcbb96c.png" />
     <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721417763/14b0def5b5af.png" />
@@ -227,41 +227,61 @@
     <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721421215/f41126f34a2d.png" />
     <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721422673/b86c80793226.png" />
   </div>
-  
+
   <div class="container mx-auto p-4 w-full border border-[#DEE3EB] mt-3">
-    
+
         <!-- stie Items -->
         <div *ngIf="siteItems?.length; else noItems" class="grid grid-cols-9 gap-4 items-center mt-2">
           <div *ngFor="let item of siteItems" class="site-item" class="flex items-center space-x-2">
             <a class="text-sm font-medium text-gray-700 hover:text-blue-600" [href]="item.link" target="_blank" rel="noopener noreferrer">
-              <img   style="width: 20px;" [src]="item.icon" [alt]="item.name" class="site-icon" />
-              <span class="site-name">{{ item.name }}</span>
+              <div class="flex flex items-center space-x-2">
+
+              <img  style="width: 20px;" [src]="item.icon" [alt]="item.name" class="site-icon" />
+              <span class="site-name turncate">{{ item.name }}</span>
+              </div>
             </a>
           </div>
         </div>
-        
+
         <ng-template #noItems>
           <p>No items available.</p>
         </ng-template>
+        <div class="w-full border-t border-gray-300 my-4"></div>
+
+        <div *ngIf="commonSiteItems?.length; else noItems" class="grid grid-cols-9 gap-1 items-center mt-2">
+          <div *ngFor="let item of commonSiteItems" class="site-item" class="flex items-center space-x-2">
+            <a class="text-sm font-medium text-gray-700 hover:text-blue-600" [href]="item.link" target="_blank" rel="noopener noreferrer">
+              <div class="flex flex items-center space-x-2">
+
+                <img *ngIf="item.icon" style="width: 20px;" [src]="item.icon" [alt]="item.name" class="site-icon" />
+              <span class="site-name turncate">{{ item.name }}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <ng-template #noItems>
+          <p>No common site items available.</p>
+        </ng-template>
 
   <br>
- 
-    <div class="flex w-full justify-center items-center border-b border-gray-300">
+
+    <!-- <div class="flex w-full justify-center items-center border-b border-gray-300">
       登录后将保留您的设置，便于您在其他地方查看
-  
+
       <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded h-8">
-        登录 SHOW MROE
+        登录
       </button>
-    </div>
+    </div> -->
 
 
-   
+
     <div class="flex justify-center items-center mt-2">
-      <button id="showButton"  *ngIf="isLongContentHidden" id="showButton" (click)="toggleLongContent()"> 点击展开  show button<i class="hgi-stroke hgi-arrow-down-01"></i></button>
+      <button id="showButton"  *ngIf="isLongContentHidden" id="showButton" (click)="toggleLongContent()"> 点击展开 <i class="hgi-stroke hgi-arrow-down-01"></i></button>
     </div>
   </div>
-<br>  
-  
+<br>
+
   <div id="contentDiv" style="background-color: rgb(255, 255, 255) ; border-color: antiquewhite;" class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3 hidden">
     <table style="width: 100%;">
       <tr *ngFor="let category of categories">
@@ -270,21 +290,21 @@
               <a   [href]="item.url" target="_blank">{{ item.name }}</a>
           </td>
         </table>
-     
 
-    
+
+
     <div class="flex items-center justify-center">
       <a href="#"  *ngIf="!isLongContentHidden" id="hideButton" (click)="toggleLongContent()"> 点击收起 <i class="hgi-stroke hgi-arrow-up-01"></i></a>
     </div>
   </div>
-  
+
   <div class="container mx-auto mx-4 mb-2 w-full py-3 grid grid-cols-12 gap-4">
     <div class="col-span-3"> <!-- left nav-->
-  
-  
-  
-  
-  
+
+
+
+
+
       <nav class="nav-1 border border-gray-100 shadow-md ">
         <div class="flex border-b border-gray-200 shadow-md border-green-50">
           <button
@@ -314,87 +334,49 @@
         </div>
       </nav>
       <div class="tab-content p-4 bg-white border border-gray-200" id="tab1">
-  
-  
-  
-  
+
+
+
+
         <div class="accordion">
           <!-- Accordion Item 1 -->
-          <div class="accordion-item">
+          <div *ngFor="let item of hotLists" class="accordion-item">
             <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2">
-              <h6 class="text-md">1. Learn from father</h6>
+              <h6 class="text-md">{{ item.name }}</h6>
             </div>
             <div class="accordion-content p-2">
-              <div class="flex w-full items-center">
-                <div class="flex-1">
-                  <img src="https://fyb-2.cdn.bcebos.com/hotboard_image/65075a4fe4762455a85737650fa035b8" class="w-20" />
+              <div class="flex w-full items-center space-x-2 ">
+                <div class="w-2/6">
+                  <img [src]="item.imageLink" class="w-full" />
                 </div>
-                <div class="flex-1">
-                  <a href="">1. Learn from father</a>
-                  <p>Index: 302392</p>
-                  <p>Genre: Action</p>
-                  <p>Region: Mainland China</p>
+                <div class="w-4/6">
+                  <a [href]="item.url">{{ item.name }}</a>
+                    <p *ngFor="let info of item.infoTexts">{{ info }}</p>
                 </div>
               </div>
             </div>
           </div>
-  
-          <!-- Accordion Item 2 -->
-          <div class="accordion-item">
-            <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2">
-              <h6 class="text-md">2. Learn from father</h6>
-            </div>
-            <div class="accordion-content hidden p-2">
-              <div class="flex w-full items-center">
-                <div class="flex-1">
-                  <img src="https://fyb-2.cdn.bcebos.com/hotboard_image/65075a4fe4762455a85737650fa035b8" class="w-20" />
-                </div>
-                <div class="flex-1">
-                  <a href="">2. Learn from father</a>
-                  <p>Index: 302392</p>
-                  <p>Genre: Action</p>
-                  <p>Region: Mainland China</p>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Accordion Item 3 -->
-          <div class="accordion-item">
-            <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2">
-              <h6 class="text-md">3. Learn from father</h6>
-            </div>
-            <div class="accordion-content hidden p-2">
-              <div class="flex w-full items-center">
-                <div class="flex-1">
-                  <img src="https://fyb-2.cdn.bcebos.com/hotboard_image/65075a4fe4762455a85737650fa035b8" class="w-20" />
-                </div>
-                <div class="flex-1">
-                  <a href="">3. Learn from father</a>
-                  <p>Index: 302392</p>
-                  <p>Genre: Action</p>
-                  <p>Region: Mainland China</p>
-                </div>
-              </div>
-            </div>
-          </div>
+
+
+
+
         </div>
-  
+
       </div>
-  
+
       <div class="tab-content p-4 bg-white border border-gray-200 hidden" id="tab2">
         <p>Content for Tab 2 goes here.</p>
       </div>
       <div class="tab-content p-4 bg-white border border-gray-200 hidden" id="tab3">
         <p>Content for Tab 3 goes here.</p>
       </div>
-  
-  
+
+
       <div class="tab-content p-4 bg-white border border-gray-200 hidden" id="tab4">
         <p>Content for Tab 4 goes here.</p>
       </div>
-  
-  
+
+
       <div class="nav-2  border border-gray-300 shadow-md my-3">
         <nav class="nav-1 border border-gray-300 shadow-md  w-full">
           <div class="flex border-b border-gray-200 shadow-md border-green-500">
@@ -454,7 +436,7 @@
                     alt="Slide 3" class="w-full object-cover" />
                 </div>
               </div>
-  
+
               <!-- Navigation Buttons -->
               <button class="absolute top-1/2 left-4 -translate-y-1/2 bg-gray-800 text-white rounded-full p-2"
                 id="prevBtn">
@@ -465,54 +447,28 @@
                 &#10095;
               </button>
             </div>
-  
+
             <div class="p-4 max-w-lg mx-auto bg-white shadow-md rounded-md">
-              <ul class="space-y-4">
-                <li class="flex items-center justify-between border-b pb-2">
+              <ol class="space-y-4 list-decimal">
+                <!-- Top List Item -->
+
+                <li *ngFor="let item of TopListItems" class="flex items-center justify-start border-b pb-2">
+
+                  <a [href]="item.url" title="{{ item.name }}" class="text-blue-500 hover:underline truncate">
+                    {{ item.name }}
+                  </a>
+                </li>
+                <li class="flex items-center justify-start border-b pb-2">
                   <span class="font-bold text-gray-600">1.</span>
                   <a href="https://haokan.baidu.com/v?vid=10770644499337174989&amp;fr=hao123-op"
                     title="TF四代魏子宸被校园霸凌，头被按在座椅上，校园墙上全是语言霸凌" class="text-blue-500 hover:underline truncate">
                     TF四代魏子宸被校园霸凌，头被按...
                   </a>
                 </li>
-                <li class="flex items-center justify-between border-b pb-2">
-                  <span class="font-bold text-gray-600">2.</span>
-                  <a href="https://haokan.baidu.com/v?vid=3408479960687701872&amp;fr=hao123-op"
-                    title="赵忠祥葬礼上，倪萍为何成为众矢之的？真相揭晓！" class="text-blue-500 hover:underline truncate">
-                    赵忠祥葬礼上，倪萍为何成为众矢之...
-                  </a>
-                </li>
-                <li class="flex items-center justify-between border-b pb-2">
-                  <span class="font-bold text-gray-600">3.</span>
-                  <a href="https://haokan.baidu.com/v?vid=4324781478178315396&amp;fr=hao123-op" title="央视名嘴背后，官职显赫令人震惊"
-                    class="text-blue-500 hover:underline truncate">
-                    央视名嘴背后，官职显赫令人震惊
-                  </a>
-                </li>
-                <li class="flex items-center justify-between border-b pb-2">
-                  <span class="font-bold text-gray-600">4.</span>
-                  <a href="https://haokan.baidu.com/v?vid=5001577326320600275&amp;fr=hao123-op"
-                    title="张也未婚不孤单，吕继红陪伴多年成灵魂伴侣！" class="text-blue-500 hover:underline truncate">
-                    张也未婚不孤单，吕继红陪伴多年成...
-                  </a>
-                </li>
-                <li class="flex items-center justify-between border-b pb-2">
-                  <span class="font-bold text-gray-600">5.</span>
-                  <a href="https://haokan.baidu.com/v?vid=3269264132239148258&amp;fr=hao123-op"
-                    title="新闻女神海霞坦言，与康辉大学同学情谊深，搭档默契天衣无缝！" class="text-blue-500 hover:underline truncate">
-                    新闻女神海霞坦言，与康辉大学同学...
-                  </a>
-                </li>
-                <li class="flex items-center justify-between border-b pb-2">
-                  <span class="font-bold text-gray-600">6.</span>
-                  <a href="https://haokan.baidu.com/v?vid=4684724601119646423&amp;fr=hao123-op"
-                    title="大衣哥为儿子娶妻陈蒙，却换来无尽苦难与赚钱重任" class="text-blue-500 hover:underline truncate">
-                    大衣哥为儿子娶妻陈蒙，却换来无尽...
-                  </a>
-                </li>
-              </ul>
+
+              </ol>
             </div>
-  
+
           </div>
           <div class="tab-content-2 p-4 bg-white border border-gray-200 hidden" id="tabtwo2">
             <p>Content 2.</p>
@@ -526,11 +482,11 @@
           <div class="tab-content-2 p-4 bg-white border border-gray-200 hidden" id="tabtwo5">
             <p>Content 1.</p>
           </div>
-  
+
         </div>
-  
+
       </div>
-  
+
       <div class="nav-3  border border-gray-300 shadow-md my-3">
         <nav class="nav-1 border border-gray-300 shadow-md mb-3 w-full">
           <div class="flex border-b border-gray-200 shadow-md border-green-500">
@@ -548,16 +504,16 @@
             </button>
           </div>
         </nav>
-  
+
         <div class="tab-content-3 p-4 bg-white border border-gray-200 hidden" id="tab3a">
           <p>tab 3a 1. above slide</p>
         </div>
         <div class="tab-content-3 p-4 bg-white border border-gray-200 hidden" id="tab3b">
           <p>tab 3b 1.above slide</p>
         </div>
-  
+
       </div>
-  
+
       <div class="nav-4  border border-gray-300 shadow-md my-3">
         <div class="flex justify-between items-center w-full p-2 shadow-md">
           <h6>搜索热点</h6>
@@ -607,90 +563,49 @@
             </li>
           </ul>
         </div>
-  
+
       </div>
-  
+
       <div class="nav-5 flex border border-gray-300 shadow-md my-3">
         <h6>实时脉搏</h6>
-  
+
       </div>
-  
+
     </div> <!-- end left nav-->
-  
+
     <div class="col-span-9 border border-gray">
+
+
       <!-- Tabs -->
       <div class="w-full">
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-1">
-          推荐
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-2">
-          视频
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-3">
-          汽车
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-4">
-          游戏
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-5">
-          直播
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-6">
-          娱乐
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-  
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-7">
-          娱乐
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-  
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-8">
-          科技
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-  
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-9">
-          财经
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-  
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-10">
-          历史
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-  
-  
-        <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
-          data-tab="tab-11">
-          时尚
-          <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
-        </button>
-  
-  
-  
-  
+
+        <div class="flex space-x-4 overflow-x-auto py-2">
+            <div *ngFor="let feed of feedTitles; let i = index" class="flex-shrink-0">
+            <button class="tab-btn relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600"
+              [attr.data-tab]="'tab-' + (i+1)">
+              {{ feed.name }}
+              <span class="active-indicator absolute bottom-0 left-0 w-full h-0.5 bg-green-600 hidden"></span>
+            </button>
+            </div>
+        </div>
+
+
+
+
+
       </div>
-  
+
       <!-- Content -->
       <div class="mt-4">
         <div id="tab-1" class="tab-panel">
-          <div class="container mx-auto px-4 py-6">
+          <div class="container mx-auto px-4 ">
+
+              <ul class="mb-2 ml-4 space-y-2 list-disc">
+                <li *ngFor="let news of topNews">
+                  <a [href]="news.url" target="_blank" class="text-blue-600 hover:underline">{{ news.name }}</a>
+                </li>
+              </ul>
+
             <div class="grid grid-cols-1">
               <!-- Blog Item -->
               <div class="flex items-start space-x-4">
@@ -713,7 +628,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <div class="flex items-start space-x-4">
                 <img
                   src="https://dgss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3736371517,250974868&fm=30&app=106&f=JPEG?w=312&h=208&s=22D018C456CA0F5F9DC96C1703001040"
@@ -732,7 +647,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <div class="flex items-start space-x-4">
                 <!-- Image -->
                 <img
@@ -753,9 +668,9 @@
                   </div>
                 </div>
               </div>
-  
+
               <div class="flex items-start space-x-4">
-  
+
                 <div class="flex-1">
                   <h3 class="text-lg font-semibold text-gray-800 hover:text-blue-600">
                     <a href="#">寒潮频繁出现冷冬就要来？小雪和寒潮是固定搭配？科普→</a>
@@ -770,7 +685,7 @@
                   </div>
                 </div>
               </div>
-  
+
             </div>
           </div>
         </div>
@@ -784,7 +699,7 @@
           <p>Content for Tab 4</p>
         </div>
         <div id="tab-5" class="tab-panel hidden">
-  
+
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
             <div class="bg-white shadow-sm overflow-hidden">
               <img
@@ -800,7 +715,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="bg-white shadow-sm overflow-hidden">
               <img
                 src="http://pics3.baidu.com/feed/9a504fc2d56285358d58dfde78de89c8a6ef6351.jpeg?token=66a3536d3f7f3080bb11f735d144e910"
@@ -815,7 +730,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="bg-white shadow-sm overflow-hidden">
               <img
                 src="http://pics3.baidu.com/feed/9a504fc2d56285358d58dfde78de89c8a6ef6351.jpeg?token=66a3536d3f7f3080bb11f735d144e910"
@@ -830,7 +745,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="bg-white shadow-sm overflow-hidden">
               <img
                 src="http://pics3.baidu.com/feed/9a504fc2d56285358d58dfde78de89c8a6ef6351.jpeg?token=66a3536d3f7f3080bb11f735d144e910"
@@ -845,7 +760,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="bg-white shadow-sm overflow-hidden">
               <img
                 src="http://pics3.baidu.com/feed/9a504fc2d56285358d58dfde78de89c8a6ef6351.jpeg?token=66a3536d3f7f3080bb11f735d144e910"
@@ -860,7 +775,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="bg-white shadow-sm overflow-hidden">
               <img
                 src="http://pics3.baidu.com/feed/9a504fc2d56285358d58dfde78de89c8a6ef6351.jpeg?token=66a3536d3f7f3080bb11f735d144e910"
@@ -875,7 +790,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="bg-white shadow-sm overflow-hidden">
               <img
                 src="http://pics3.baidu.com/feed/9a504fc2d56285358d58dfde78de89c8a6ef6351.jpeg?token=66a3536d3f7f3080bb11f735d144e910"
@@ -890,11 +805,11 @@
                 </div>
               </div>
             </div>
-  
-  
+
+
           </div>
-  
-  
+
+
         </div>
         <div id="tab-6" class="tab-panel hidden">
           <p>Content for Tab 6</p>
@@ -914,11 +829,11 @@
         <div id="tab-11" class="tab-panel hidden">
           <p>Content for Tab 11</p>
         </div>
-  
+
       </div>
     </div>
   </div>
-  
+
   <footer class="bg-gray-200 py-2 fixed bottom-0 w-full ">
     <div class="container flex justify-start items-center mx-auto gap-5 text-xs ">
       <a class="item g-fc3 g-fc23h text-blue-500 hover:underline" href="http://www.hao123.com/abouthao123">关于本站</a>

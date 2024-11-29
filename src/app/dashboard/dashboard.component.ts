@@ -5,6 +5,14 @@ import { CommonSitesService } from '../services/common-sites.service';
 import { GovSitesService } from '../services/gov-sites.service';
 import { HotListService } from '../services/hot-list.service';
 import { HotListItemService } from '../services/hot-list-item.service';
+import { HotSearchsService } from '../services/hot-searchs.service';
+import { ItemCategoriesService } from '../services/item-categories.service';
+import { ItemsService } from '../services/items.service';
+import { TopListsService } from '../services/top-lists.service';
+import { TopListItemsService } from '../services/top-list-items.service';
+import { TopNewsService } from '../services/top-news.service';
+import { HotTabsService } from '../services/hot-tabs.service';
+import { feedTitles } from '../data/feed-title';
 
 
 @Component({
@@ -21,22 +29,45 @@ export class DashboardComponent {
   govSites: any[] = [];
   hotLists: any[] = [];
   hotListItems: any[] = [];
-  
-  
+
+  topNews: any[] = [];
+  TopListItems: any[] = [];
+
+  feedTitles: any[] = feedTitles;
+
+
   constructor(private categoryService: CategoryService,
     private siteItemService : SiteItemsService,
     private commonSitesService : CommonSitesService,
     private GovSitesService : GovSitesService,
     private HotListService : HotListService,
-    private HotListItemService : HotListItemService
+    private HotListItemService : HotListItemService,
+    private HotSearchsService : HotSearchsService,
+    private ItemCategoriesService : ItemCategoriesService,
+    private ItemsService : ItemsService,
+    private TopListsService : TopListsService,
+    private TopListItemsService : TopListItemsService,
+    private TopNewsService : TopNewsService,
+    private HotTabsService : HotTabsService
+
+
   ) {}
   ngOnInit(): void {
-    this.fetchCategories(1, 10); 
-    this.fetchsiteItems(1, 10); 
-    this.fetchCommonSiteItem(1, 10); 
-    this.fetchGovSites(1, 10); 
+    this.fetchCategories(1, 10);
+    this.fetchsiteItems(1, 10);
+    this.fetchCommonSiteItem(1, 10);
+    this.fetchGovSites(1, 10);
     this.fetchHotList(1,10);
     this.fetchHotListItem(1,10);
+
+    this.fetchHotSearch(1,10);
+    this.fetchItemCategories(1,10);
+    this.fetchItems(1,10);
+    this.fetchTopLists(1,10);
+    this.fetchTopListItems(1,10);
+    this.fetchTopNews(1,4);
+    this.fetchHotTabs(1,10);
+
   }
  // Togogle show/off long content
   toggleLongContent(): void {
@@ -57,6 +88,10 @@ export class DashboardComponent {
     );
   }
 
+  setFeedTitles  = () => {
+    this.feedTitles = feedTitles;
+  };
+
   //  siteItems
     fetchsiteItems(pageId: number, pageSize : number) :void{
       this.siteItemService.getsiteItems(pageId, pageSize).subscribe(
@@ -68,7 +103,7 @@ export class DashboardComponent {
         }
       )
     };
-    
+
     // commonSiteItem
     fetchCommonSiteItem(pageId: number, pageSize : number) :void{
       this.commonSitesService.getCommonSiteItem(pageId, pageSize).subscribe(
@@ -118,4 +153,91 @@ export class DashboardComponent {
       }
     )
   };
+
+  // hotSearchs
+  fetchHotSearch(pageId: number, pageSize : number) :void{
+    this.HotSearchsService.getHotSearchs(pageId, pageSize).subscribe(
+      (data) => {
+        this.hotListItems =  data;
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching HotLists:', error);
+      }
+    )
+  };
+  //ItemCategoriesService
+  fetchItemCategories(pageId: number, pageSize : number) :void{
+    this.ItemCategoriesService.getItemCategories(pageId, pageSize).subscribe(
+      (data) => {
+        this.hotListItems =  data;
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching HotLists:', error);
+      }
+    )
+  };
+  //ItemsService
+  fetchItems(pageId: number, pageSize : number) :void{
+    this.ItemsService.getItems(pageId, pageSize).subscribe(
+      (data) => {
+        this.hotListItems =  data;
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching HotLists:', error);
+      }
+    )
+  };
+  //TopListsService
+  fetchTopLists(pageId: number, pageSize : number) :void{
+    this.TopListsService.getTopLists(pageId, pageSize).subscribe(
+      (data) => {
+        this.hotListItems =  data;
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching HotLists:', error);
+      }
+    )
+  };
+  //TopListItemsService
+  fetchTopListItems(pageId: number, pageSize : number) :void{
+    this.TopListItemsService.getTopListItems(pageId, pageSize).subscribe(
+      (data) => {
+        this.TopListItems =  data.topListItems;
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching TopListItemsService:', error);
+      }
+    )
+  };
+  //TopNewsService :done
+  fetchTopNews(pageId: number, pageSize : number) :void{
+    this.TopNewsService.getTopNews(pageId, pageSize).subscribe(
+      (data) => {
+        this.topNews =  data.topNews;
+        console.log("top News");
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching Top News:', error);
+      }
+    )
+  };
+  //HotTabsService
+  fetchHotTabs(pageId: number, pageSize : number) :void{
+    this.HotTabsService.getHotTabs(pageId, pageSize).subscribe(
+      (data) => {
+        this.hotListItems =  data;
+        console.log(JSON.stringify(data))
+      },
+      (error) =>{
+        console.error('Error fetching HotLists:', error);
+      }
+    )
+  };
+
 }

@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createCommonSite(t *testing.T) *CommonSite {
@@ -26,7 +27,8 @@ func createCommonSite(t *testing.T) *CommonSite {
 }
 
 func TestAddCommonSite(t *testing.T) {
-	createCommonSite(t)
+	// createCommonSite(t)
+	TestAddMannyCommonSite(t)
 }
 
 func TestGetAllCommonSite(t *testing.T) {

@@ -230,22 +230,22 @@
   
   <div class="container mx-auto p-4 w-full border border-[#DEE3EB] mt-3">
     
-    <!-- stie Items -->
-     <div *ngIf="siteItems?.length; else noItems">
-    <div *ngFor="let item of siteItems" class="site-item">
-      <a [href]="item.link" target="_blank" rel="noopener noreferrer">
-        <img [src]="item.icon" [alt]="item.name" class="site-icon" />
-        <span class="site-name">{{ item.name }}</span>
-      </a>
-    </div>
-  </div>
-  
-  <ng-template #noItems>
-    <p>No items available.</p>
-  </ng-template>
+        <!-- stie Items -->
+        <div *ngIf="siteItems?.length; else noItems" class="grid grid-cols-9 gap-4 items-center mt-2">
+          <div *ngFor="let item of siteItems" class="site-item" class="flex items-center space-x-2">
+            <a class="text-sm font-medium text-gray-700 hover:text-blue-600" [href]="item.link" target="_blank" rel="noopener noreferrer">
+              <img   style="width: 20px;" [src]="item.icon" [alt]="item.name" class="site-icon" />
+              <span class="site-name">{{ item.name }}</span>
+            </a>
+          </div>
+        </div>
+        
+        <ng-template #noItems>
+          <p>No items available.</p>
+        </ng-template>
 
-  
-    <div class="grid grid-cols-9 gap-4 items-center">
+  <br>
+    <!-- <div class="grid grid-cols-9 gap-4 items-center">
       <div class="flex items-center space-x-2">
         <span class="w-5 h-5 bg-cover bg-center" style="
                 background-image: url('https://dgss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2021-3-5/baidulogo.png');
@@ -530,10 +530,11 @@
           title="搜狐•热点">
           添加网址
         </a>
+   
       </div>
   
     </div>
-
+     -->
     <div class="flex w-full justify-center items-center border-b border-gray-300">
       登录后将保留您的设置，便于您在其他地方查看
   
@@ -541,7 +542,9 @@
         登录
       </button>
     </div>
-    <div class="grid grid-cols-9 gap-4 items-center mt-2">
+
+
+    <!-- <div class="grid grid-cols-9 gap-4 items-center mt-2">
       <div class="flex items-center space-x-2">
         <a href="http://www.baidu.com/?tn=sitehao123_15" class="text-sm font-medium text-gray-700 hover:text-blue-600"
           title="百度">
@@ -682,58 +685,25 @@
   
   
   
-      <!-- Site 2 -->
-    </div>
+    </div> -->
     <div class="flex justify-center items-center mt-2">
       <a href="#" id="showButton"> 点击展开 <i class="hgi-stroke hgi-arrow-down-01"></i></a>
     </div>
   </div>
+<br>  
   
-  
-  <div id="contentDiv" class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3 hidden">
-    <div class="grid grid-cols-12 gap-4 items-center">
-      <a href="#" class="linkLongFirst">视频</a>
-      <a href="" class="">好看视频</a>
-      <a href="" class="">爱奇艺高清</a>
-      <a href="" class="">腾讯视频</a>
-      <a href="" class="">百度直播</a>
-      <a href="" class="">优酷网</a>
-      <a href="" class="">芒果TV</a>
-      <a href="" class="">搜狐视频</a>
-      <a href="" class="">咪咕视频</a>
-      <a href="" class="">百搜视频</a>
-      <a href="" class="">央视网</a>
-      <a href="" class="">更多>></a>
-  
-  
-    </div>
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
-    lot of website list are here<br />
+  <div id="contentDiv" style="background-color: rgb(255, 255, 255) ; border-color: antiquewhite;" class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3 hidden">
+    <table style="width: 100%;">
+      <tr *ngFor="let category of categories">
+        <td style="color: #0AA770;">{{ category.name }}</td>
+            <td *ngFor="let item of category.items">
+              <a   [href]="item.url" target="_blank">{{ item.name }}</a>
+              <!-- <span *ngIf="item.category"> ({{ item.category }})</span> -->
+          </td>
+        </table>
+     
+
+    
     <div class="flex items-center justify-center">
       <a href="#" id="hideButton"> 点击收起 <i class="hgi-stroke hgi-arrow-up-01"></i></a>
     </div>

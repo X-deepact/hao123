@@ -21,7 +21,7 @@ export class DashboardComponent {
   hotLists: any[] = [];
   hotListItems: any[] = [];
   
-
+  
   constructor(private categoryService: CategoryService,
     private siteItemService : SiteItemsService,
     private commonSitesService : CommonSitesService,
@@ -43,6 +43,7 @@ export class DashboardComponent {
     this.categoryService.getCategories(pageId, pageSize).subscribe(
       (data) => {
         this.categories = data.categories;
+        console.log("asdfsadfsdfsdfasd")
       },
       (error) => {
         console.error('Error fetching categories:', error);

@@ -340,7 +340,7 @@
 
         <div class="accordion">
           <!-- Accordion Item 1 -->
-          <div *ngFor="let item of hotLists" class="accordion-item">
+          <!-- <div *ngFor="let item of hotLists" class="accordion-item">
             <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2">
               <h6 class="text-md">{{ item.name }}</h6>
             </div>
@@ -355,7 +355,35 @@
                 </div>
               </div>
             </div>
+          </div> -->
+
+          <div
+          *ngFor="let item of hotLists; let i = index"
+          class="accordion-item"
+          (mouseenter)="expandedIndex = i"
+          (mouseleave)="expandedIndex = null"
+        >
+          <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2">
+            <h6 class="text-md turncate">{{ item.name }} taht name</h6>
           </div>
+          <div
+            class="accordion-content overflow-hidden transition-all duration-300 ease-in-out"
+            [class.max-h-0]="expandedIndex !== i"
+            [class.opacity-0]="expandedIndex !== i"
+            [class.max-h-screen]="expandedIndex === i"
+            [class.opacity-100]="expandedIndex === i"
+          >
+            <div class="flex w-full items-center space-x-2">
+              <div class="w-2/6">
+                <img [src]="item.imageLink" class="w-full" />
+              </div>
+              <div class="w-4/6">
+                <a [href]="item.url">{{ item.name }}</a>
+                <p *ngFor="let info of item.infoTexts">{{ info }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 

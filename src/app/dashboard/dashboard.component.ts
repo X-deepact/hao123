@@ -34,6 +34,7 @@ export class DashboardComponent {
   TopListItems: any[] = [];
 
   feedTitles: any[] = feedTitles;
+  expandedIndex: number | null = null;
 
 
   constructor(private categoryService: CategoryService,

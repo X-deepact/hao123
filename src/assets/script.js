@@ -153,3 +153,13 @@ document.getElementById('nextBtn').addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % slides.length;
   slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 });
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const dropdownButton = document.getElementById("dropdown-button");
+//   const dropdown = document.getElementById("dropdown");
+
+//   dropdownButton.addEventListener("click", function () {
+//     dropdown.classList.toggle("hidden");
+//   });
+// });

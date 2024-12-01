@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PostcontentComponent } from './components/postcontent/postcontent.component';
 import { SideslideComponent } from './components/sideslide/sideslide.component';
 import { HotlistComponent } from './components/hotlist/hotlist.component';
+import { GamebarComponent } from './components/gamebar/gamebar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HotlistComponent } from './components/hotlist/hotlist.component';
     FooterComponent,
     PostcontentComponent,
     SideslideComponent,
-    HotlistComponent
+    HotlistComponent,
+    GamebarComponent
   ],
   imports: [
     BrowserModule,

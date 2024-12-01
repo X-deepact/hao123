@@ -1,4 +1,25 @@
+<div class="fixed right-4 top-2/3 transform -translate-y-1/2  p-2  flex flex-col">
 
+  <div class="mb-2 flex w-full border border-gray-300">
+     <img src="assets/icon/game2.png" alt="game" class="w-10 inline-block" />
+
+  </div>
+  <div
+  [class.hidden]="!isTopHidden"
+   class="w-full text-center text-2xl font-bold transition-transform duration-300 border border-gray-300"
+   (click)="scrollToTop()">
+    <i class="hgi-stroke hgi-arrow-up-01"></i>
+  </div>
+  <div class="border border-gray-300 ">
+    <img src="assets/icon/d5fecbd5239db7cbc8d7939a75e4d830.png" alt="game" class="w-10 inline-block" />
+  </div>
+  <div class="flex py-2 justify-center w-full my-3 border border-gray-300">
+    <div class="flex flex-col">
+    <img src="assets/icon/tool.png" alt="game" class="w-8 inline-block " />
+      辅助<br/>模式
+  </div>
+  </div>
+</div>
   <div class="container flex items-center justify-around mx-auto px-4  my-2 w-full border border-gray-200 p-2">
 
     <div *ngIf="govSites && govSites.length; else noData" class="govSites">
@@ -16,15 +37,7 @@
     </ng-template>
   </div>
 
-  <div class="container flex justify-between items-center  mx-auto">
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721416180/ce719dcbb96c.png" />
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721417763/14b0def5b5af.png" />
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721419069/866df4c810ce.png" />
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721424351/b738e3cfac72.png" />
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721420102/28ae5e20c7f4.png" />
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721421215/f41126f34a2d.png" />
-    <img src="https://hao123-static.cdn.bcebos.com/cms/2024-10/1728721422673/b86c80793226.png" />
-  </div>
+ <app-gamebar/>
 
   <div class="container mx-auto p-4 w-full border border-[#DEE3EB] mt-3">
 

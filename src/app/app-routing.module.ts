@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/create', pathMatch: 'full' }, // Redirect to '/home'
+  // { path: '', redirectTo: '/create', pathMatch: 'full' }, // Redirect to '/home'
 
-  { path: 'create', component:DashboardComponent},
+  { path: '', component:DashboardComponent,pathMatch: 'full' },
 ];
 
 @NgModule({

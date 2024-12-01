@@ -48,8 +48,16 @@
         (mouseenter)="expandedIndex = i"
         (mouseleave)="expandedIndex = 0"
       >
-        <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2">
+        <div class="accordion-header hover:bg-gray-200 cursor-pointer p-2 flex justify-between">
           <h6 class="text-md turncate">{{ item.name }} taht name</h6>
+          <div class="flex justify-end">
+            <div>238232</div>
+            <div class="">
+              <i class="hgi-stroke hgi-arrow-up-01"></i>
+              <!-- <i class="hgi-stroke hgi-arrow-down-01"></i> -->
+               <!-- <i>-</i> -->
+            </div>
+          </div>
         </div>
         <div
           class="accordion-content overflow-hidden transition-all duration-300 ease-in-out"

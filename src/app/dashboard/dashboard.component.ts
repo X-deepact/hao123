@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CategoryService } from '../services/category.service';
 import { SiteItemsService } from '../services/site-items.service';
 import { CommonSitesService } from '../services/common-sites.service';
 import { GovSitesService } from '../services/gov-sites.service';
-import { HotListService } from '../services/hot-list.service';
 import { HotListItemService } from '../services/hot-list-item.service';
 import { HotSearchsService } from '../services/hot-searchs.service';
 import { ItemCategoriesService } from '../services/item-categories.service';
@@ -30,6 +29,8 @@ export class DashboardComponent {
   TopListItems: any[] = [];
 
   feedTitles: any[] = feedTitles;
+
+
 
 
 
@@ -67,6 +68,24 @@ export class DashboardComponent {
     this.isLongContentHidden = !this.isLongContentHidden;
   }
 
+  isTopHidden = false; // Tracks visibility of the top section
+
+  private previousScrollY = 0; // To track the previous scroll position
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const currentScrollY = window.scrollY;
+
+    /// Check if the user is scrolling down and cannot scroll further up
+    this.isTopHidden = currentScrollY > this.previousScrollY && currentScrollY > 0;
+
+    // Update the previous scroll position
+    this.previousScrollY = currentScrollY;
+  }
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 
   // Categories
   fetchCategories(pageId: number, pageSize: number): void {
@@ -81,9 +100,6 @@ export class DashboardComponent {
     );
   }
 
-  setFeedTitles  = () => {
-    this.feedTitles = feedTitles;
-  };
 
   //  siteItems
     fetchsiteItems(pageId: number, pageSize : number) :void{

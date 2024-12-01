@@ -36,7 +36,7 @@ func TestGetAllSiteItem(t *testing.T) {
 
 	// Step 2: Retrieve all categories
 	filter := bson.M{} // Empty filter to retrieve all documents
-	results, err := testStore.GetAllSiteItem(context.Background(), "siteItem", filter, 1, 3)
+	results, err := testStore.GetAllSiteItem(context.Background(), "siteItem", filter, 0, 3)
 
 	// Step 3: Assertions
 	require.NoError(t, err)

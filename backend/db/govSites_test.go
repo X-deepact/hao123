@@ -31,7 +31,7 @@ func TestAddGovSite(t *testing.T) {
 func TestGetAllGovSites(t *testing.T) {
 	insertGovSites := createGovSites(t)
 	filter := bson.M{}
-	results, err := testStore.GetAllGovSites(context.Background(), "govSites", filter, 1, 3)
+	results, err := testStore.GetAllGovSites(context.Background(), "govSites", filter, 0, 3)
 
 	require.NoError(t, err)
 	require.NotEmpty(t, results)

@@ -33,7 +33,7 @@ func TestGetAllCommonSite(t *testing.T) {
 	insertedCommonSite := createCommonSite(t)
 
 	filter := bson.M{} // Empty filter to retrieve all documents
-	results, err := testStore.GetAllCommonSiteItem(context.Background(), "commonSite", filter, 1, 3)
+	results, err := testStore.GetAllCommonSiteItem(context.Background(), "commonSite", filter, 0, 3)
 
 	// Step 3: Assertions
 	require.NoError(t, err)

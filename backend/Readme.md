@@ -1,69 +1,45 @@
-Backend for Hao123 Clone
+# Hao
 
-This repository contains the backend implementation for a demo project inspired by Hao123, a directory and navigation portal. The backend is built to provide a flexible, scalable, and efficient API to support features like managing website links, categories, and user interactions.
+Hao is a web application using MongoDB as its database, containerized with Docker.
 
-Table of Contents
+## Routes
 
-Features
-Tech Stack
-Installation
-Environment Variables
-API Endpoints
-Database Schema
-Contributing
+| Method | Endpoint            | Description              |
+|--------|---------------------|--------------------------|
+| GET    | `/hotSearches`      | Get all hot searches     |
+| GET    | `/categories`       | Get all categories       |
+| GET    | `/items`            | Get all items            |
+| GET    | `/itemCategories`   | Get all item categories  |
+| GET    | `/siteItem`         | Get all site items       |
+| GET    | `/commonSiteItem`   | Get all common site items|
+| GET    | `/topNews`          | Get all top news         |
+| GET    | `/govSites`         | Get all government sites |
+| GET    | `/hotList`          | Get all hot lists        |
+| GET    | `/hotTab`           | Get all hot tabs         |
+| GET    | `/topListItems`     | Get all top list items   |
+| GET    | `/topList`          | Get all top lists        |
 
-Tech Stack
+## Technologies
 
-Programming Language: Go (Golang)
-Database: MongoDB
-API Framework: Gin
-Configuration Management: Viper
-Testing: Go testing package
-Dependency Management: Go Modules
+- **Backend**: Go (Gin Framework)
+- **Database**: MongoDB
+- **Containerization**: Docker
 
+## Setup
 
-Installation
+1. Clone the repository:
+   ```bash
+   git clone http://206.238.118.2:10880/game/hao.git
+   cd hao
 
-Prerequisites
-Go 1.20 or higher
-MongoDB (v5 or later)
-git installed on your system
-Steps
-Clone the repository:
-git clone https://github.com/yourusername/hao123-backend.git
-cd hao123-backend
+2. go to cd backend/project
+   then run  docker-compose up --build
 
-Install dependencies:
-go mod tidy
+3. Configure the environment:
+    Create a .env file and specify your MongoDB connection settings.
 
-Set up your .env file (see Environment Variables).
-Run the application:
-go run main.go
-Access the API at http://localhost:8080
+4. Adding Dummy Data for Testing
+Before each route call,make sure the function TestAddMany(t *testing.T) is executed to add each dummy data to the database. This function is located in backend/api/db.
 
-
-Environment Variables
-
-Create a .env file in the project root and configure the following:
-
-DATABASE_URL=mongodb://admin:password@127.0.0.1:27017/?authSource=admin
-ENVIRONMENT=development
-DB_USERNAME=admin
-DB_PASSWORD=password
-DB_NAME=halo
-SOURCE=admin
-
-
-Contributing
-
-We welcome contributions! Please follow these steps:
-
-Fork the repository.
-Create a new branch for your feature or bug fix:
-git checkout -b feature-name
-Commit your changes:
-git commit -m "Description of changes"
-Push to your branch:
-git push origin feature-name
-Create a pull request.
-
+5. Run the service:
+    go run .

@@ -46,6 +46,9 @@ type Queries interface {
 	GetAllTopListItem(ctx context.Context, collectionName string, filter bson.M, skip, limit int64) ([]bson.M, error)
 	AddTopListItem(ctx context.Context, collectionName string, topListItem *topListItemParams) (*TopListItem, error)
 	AddManyTopListItem(ctx context.Context, collectionName string, topListItems []*topListItemParams) ([]*TopListItem, error)
+	GetAllContent(ctx context.Context, collectionName string, filter bson.M, skip, limit int64) ([]Content, error)
+	AddContent(ctx context.Context, collectionName string, contentParams *contentParams) (*Content, error)
+	AddManyContent(ctx context.Context, collectionName string, contentParamsList []*contentParams) ([]*Content, error)
 }
 
 // 金靖预言了麦学

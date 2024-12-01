@@ -42,8 +42,6 @@ func TestGetAllCommonSite(t *testing.T) {
 	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
-		fmt.Println("1", result["url"])
-		fmt.Println("2", insertedCommonSite.Url)
 		if result["name"] == insertedCommonSite.Name && result["url"] == insertedCommonSite.Url {
 			found = true
 			break

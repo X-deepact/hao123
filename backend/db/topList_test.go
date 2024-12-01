@@ -31,7 +31,7 @@ func TestGetAllTopList(t *testing.T) {
 	insertTopList := createTopList(t)
 	filter := bson.M{}
 
-	results, err := testStore.GetAllTopList(context.Background(), "topList", filter)
+	results, err := testStore.GetAllTopList(context.Background(), "topList", filter, 1, 3)
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 

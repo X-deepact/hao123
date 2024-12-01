@@ -43,7 +43,7 @@ func TestGetAllCategory(t *testing.T) {
 	insertedCategory := createAddCategory(t)
 
 	filter := bson.M{} // Empty filter to retrieve all documents
-	results, err := testStore.GetAllItemCategories(context.Background(), "categories", filter)
+	results, err := testStore.GetAllItemCategories(context.Background(), "categories", filter, 1, 3)
 
 	// Step 1: General Assertions
 	require.NoError(t, err)

@@ -37,7 +37,7 @@ func TestGetAllHotLists(t *testing.T) {
 	insertedHotLists := createHotList(t)
 	filter := bson.M{}
 
-	results, err := testStore.GetAllHotList(context.Background(), "hotLists", filter)
+	results, err := testStore.GetAllHotList(context.Background(), "hotLists", filter, 1, 3)
 
 	require.NoError(t, err)
 	require.NotEmpty(t, results)

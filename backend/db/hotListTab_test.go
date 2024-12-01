@@ -32,7 +32,7 @@ func TestGetAllHotTab(t *testing.T) {
 	insertHotTab := createHotTabs(t)
 	filter := bson.M{}
 
-	results, err := testStore.GetAllHotTab(context.Background(), "hotTab", filter)
+	results, err := testStore.GetAllHotTab(context.Background(), "hotTab", filter, 1, 3)
 
 	require.NoError(t, err)
 	require.NotEmpty(t, results)

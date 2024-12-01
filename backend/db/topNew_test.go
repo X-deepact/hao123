@@ -34,7 +34,7 @@ func TestGetAllTopNews(t *testing.T) {
 
 	// Step 2: Retrieve all categories
 	filter := bson.M{} // Empty filter to retrieve all documents
-	results, err := testStore.GetAllTopNews(context.Background(), "topNews", filter)
+	results, err := testStore.GetAllTopNews(context.Background(), "topNews", filter, 1, 3)
 
 	// Step 3: Assertions
 	require.NoError(t, err)

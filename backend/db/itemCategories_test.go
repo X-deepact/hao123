@@ -32,7 +32,7 @@ func TestGetAllItemCategories(t *testing.T) {
 
 	// Step 2: Retrieve all categories
 	filter := bson.M{} // Empty filter to retrieve all documents
-	results, err := testStore.GetAllItemCategories(context.Background(), "itemCategories", filter)
+	results, err := testStore.GetAllItemCategories(context.Background(), "itemCategories", filter, 1, 3)
 
 	// Step 3: Assertions
 	require.NoError(t, err)

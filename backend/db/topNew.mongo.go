@@ -7,6 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"time"
 )
 
@@ -16,14 +17,15 @@ type feedTopNewsParams struct {
 	FeedTitle string `bson:"feedTitle" json:"feedTitle"`
 }
 
-func (mq *MongoQueries) GetAllTopNews(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
+func (mq *MongoQueries) GetAllTopNews(ctx context.Context, collectionName string, filter bson.M, skip, limit int64) ([]bson.M, error) {
 	if filter == nil {
 		filter = bson.M{}
 	}
 	var results []bson.M
 
 	err := mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
-		cursor, err := collection.Find(ctx, filter)
+		findOptions := options.Find().SetSkip(skip).SetLimit(limit)
+		cursor, err := collection.Find(ctx, filter, findOptions)
 		if err != nil {
 			return err
 		}

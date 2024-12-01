@@ -8,8 +8,8 @@ import (
 )
 
 type listAllTopNewsRequest struct {
-	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=3,max=10"`
+	PageID   int64 `form:"page_id" binding:"required,min=1"`
+	PageSize int64 `form:"page_size" binding:"required,min=3,max=10"`
 }
 
 func (s *Server) getAllTopNews(ctx *gin.Context) {
@@ -24,7 +24,7 @@ func (s *Server) getAllTopNews(ctx *gin.Context) {
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}
-		if req.PageSize < 5 || req.PageSize > 10 {
+		if req.PageSize < 3 || req.PageSize > 10 {
 
 			err := errors.New("PageSize must be between 3 and 10")
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -32,10 +32,11 @@ func (s *Server) getAllTopNews(ctx *gin.Context) {
 		}
 
 	}
-
+	skip := (req.PageID - 1) * req.PageSize
+	limit := req.PageSize
 	filter := bson.M{}
 
-	topNews, err := s.store.GetAllTopNews(ctx, "topNews", filter)
+	topNews, err := s.store.GetAllTopNews(ctx, "topNews", filter, skip, limit)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}

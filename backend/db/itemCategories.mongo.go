@@ -7,6 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"time"
 )
 
@@ -15,7 +16,7 @@ type AddCategoryParams struct {
 	URL  string `bson:"url" json:"url"`   // URL for the category
 }
 
-func (mq *MongoQueries) GetAllItemCategories(ctx context.Context, collectionName string, filter bson.M) ([]bson.M, error) {
+func (mq *MongoQueries) GetAllItemCategories(ctx context.Context, collectionName string, filter bson.M, skip, limit int64) ([]bson.M, error) {
 	// Default filter to empty (matches all documents) if no filter is provided
 	if filter == nil {
 		filter = bson.M{}
@@ -23,7 +24,8 @@ func (mq *MongoQueries) GetAllItemCategories(ctx context.Context, collectionName
 	var results []bson.M
 
 	err := mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
-		cursor, err := collection.Find(ctx, filter)
+		findOptions := options.Find().SetSkip(skip).SetLimit(limit)
+		cursor, err := collection.Find(ctx, filter, findOptions)
 		if err != nil {
 			return err
 		}

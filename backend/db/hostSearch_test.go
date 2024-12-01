@@ -31,7 +31,7 @@ func TestAddHostSearch(t *testing.T) {
 func TestGetAllHostSearch(t *testing.T) {
 	insertHostSearch := createHostSearch(t)
 	filter := bson.M{}
-	results, err := testStore.GetAllHotSearch(context.Background(), "hostSearch", filter)
+	results, err := testStore.GetAllHotSearch(context.Background(), "hostSearch", filter, 1, 3)
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 

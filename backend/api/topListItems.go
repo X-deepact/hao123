@@ -8,8 +8,8 @@ import (
 )
 
 type topItemListRequest struct {
-	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=3,max=10"`
+	PageID   int64 `form:"page_id" binding:"required,min=1"`
+	PageSize int64 `form:"page_size" binding:"required,min=3,max=10"`
 }
 
 func (s *Server) getAllTopListItems(ctx *gin.Context) {
@@ -32,9 +32,11 @@ func (s *Server) getAllTopListItems(ctx *gin.Context) {
 
 	}
 
+	skip := (req.PageID - 1) * req.PageSize
+	limit := req.PageSize
 	filter := bson.M{}
 
-	topListItems, err := s.store.GetAllTopListItem(ctx, "topListItems", filter)
+	topListItems, err := s.store.GetAllTopListItem(ctx, "topListItems", filter, skip, limit)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}

@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  const slider = document.getElementById('slider');
+const slider = document.getElementById('slider');
 const slides = slider.children;
 let currentIndex = 0;
 

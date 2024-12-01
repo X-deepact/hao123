@@ -10,7 +10,6 @@ import { ItemCategoriesService } from '../services/item-categories.service';
 import { ItemsService } from '../services/items.service';
 import { TopListsService } from '../services/top-lists.service';
 import { TopListItemsService } from '../services/top-list-items.service';
-import { TopNewsService } from '../services/top-news.service';
 import { HotTabsService } from '../services/hot-tabs.service';
 import { feedTitles } from '../data/feed-title';
 
@@ -27,30 +26,25 @@ export class DashboardComponent {
   siteItems: any[] = [];
   commonSiteItems: any[] = [];
   govSites: any[] = [];
-  hotLists: any[] = [];
   hotListItems: any[] = [];
-
-  topNews: any[] = [];
   TopListItems: any[] = [];
 
   feedTitles: any[] = feedTitles;
-  expandedIndex: number | null = null;
+
 
 
   constructor(private categoryService: CategoryService,
     private siteItemService : SiteItemsService,
     private commonSitesService : CommonSitesService,
     private GovSitesService : GovSitesService,
-    private HotListService : HotListService,
+
     private HotListItemService : HotListItemService,
     private HotSearchsService : HotSearchsService,
     private ItemCategoriesService : ItemCategoriesService,
     private ItemsService : ItemsService,
     private TopListsService : TopListsService,
     private TopListItemsService : TopListItemsService,
-    private TopNewsService : TopNewsService,
     private HotTabsService : HotTabsService
-
 
   ) {}
   ngOnInit(): void {
@@ -58,7 +52,6 @@ export class DashboardComponent {
     this.fetchsiteItems(1, 10);
     this.fetchCommonSiteItem(1, 10);
     this.fetchGovSites(1, 10);
-    this.fetchHotList(1,10);
     this.fetchHotListItem(1,10);
 
     this.fetchHotSearch(1,10);
@@ -66,7 +59,6 @@ export class DashboardComponent {
     this.fetchItems(1,10);
     this.fetchTopLists(1,10);
     this.fetchTopListItems(1,10);
-    this.fetchTopNews(1,4);
     this.fetchHotTabs(1,10);
 
   }
@@ -130,17 +122,6 @@ export class DashboardComponent {
     )
   };
 
-  // hotList
-  fetchHotList(pageId: number, pageSize : number) :void{
-    this.HotListService.gethotList(pageId, pageSize).subscribe(
-      (data) => {
-        this.hotLists = data.hotLists;
-      },
-      (error) =>{
-        console.error('Error fetching HotLists:', error);
-      }
-    )
-  };
 
   // hotListItem
   fetchHotListItem(pageId: number, pageSize : number) :void{
@@ -215,19 +196,7 @@ export class DashboardComponent {
       }
     )
   };
-  //TopNewsService :done
-  fetchTopNews(pageId: number, pageSize : number) :void{
-    this.TopNewsService.getTopNews(pageId, pageSize).subscribe(
-      (data) => {
-        this.topNews =  data.topNews;
-        console.log("top News");
-        console.log(JSON.stringify(data))
-      },
-      (error) =>{
-        console.error('Error fetching Top News:', error);
-      }
-    )
-  };
+
   //HotTabsService
   fetchHotTabs(pageId: number, pageSize : number) :void{
     this.HotTabsService.getHotTabs(pageId, pageSize).subscribe(

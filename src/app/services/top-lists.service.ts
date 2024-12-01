@@ -9,7 +9,7 @@ import { API_URL } from '../constant/constant';
 
 export class TopListsService {
 
-  private apiUrl = API_URL + '/topLists'; // Backend API URL
+  private apiUrl = API_URL + '/topList'; // Backend API URL
 
   constructor(private http: HttpClient) { }
 

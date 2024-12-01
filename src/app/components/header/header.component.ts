@@ -9,6 +9,18 @@ export class HeaderComponent {
   dropdownVisible = false;
   searchDropdownVisible = false;
 
+  searchInput: string = '';
+
+  onSearchInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchInput = inputElement.value;
+  }
+
+  constructor() {}
+  onSearch(): void {
+    console.log('onSearch');
+    window.open(`https://www.baidu.com/s?wd=${encodeURIComponent(this.searchInput)}`, '_blank');
+  }
 
 
   toggleDropdown(): void {

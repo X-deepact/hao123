@@ -2,9 +2,10 @@ package api
 
 import (
 	"errors"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
-	"net/http"
 )
 
 type hotListRequest struct {
@@ -22,7 +23,7 @@ func (s *Server) getAllHotList(ctx *gin.Context) {
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}
-		if req.PageSize < 3 || req.PageSize > 10 {
+		if req.PageSize < 3 || req.PageSize > 50 {
 
 			err := errors.New("PageSize must be between 3 and 10")
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))

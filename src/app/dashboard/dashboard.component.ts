@@ -1,7 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { CategoryService } from '../services/category.service';
-import { SiteItemsService } from '../services/site-items.service';
-import { CommonSitesService } from '../services/common-sites.service';
 import { GovSitesService } from '../services/gov-sites.service';
 import { HotListItemService } from '../services/hot-list-item.service';
 import { HotSearchsService } from '../services/hot-searchs.service';
@@ -19,11 +16,9 @@ import { feedTitles } from '../data/feed-title';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  isLongContentHidden = true;
 
-  categories: any[] = [];
-  siteItems: any[] = [];
-  commonSiteItems: any[] = [];
+
+
   govSites: any[] = [];
   hotListItems: any[] = [];
   TopListItems: any[] = [];
@@ -34,9 +29,8 @@ export class DashboardComponent {
 
 
 
-  constructor(private categoryService: CategoryService,
-    private siteItemService : SiteItemsService,
-    private commonSitesService : CommonSitesService,
+  constructor(
+
     private GovSitesService : GovSitesService,
 
     private HotListItemService : HotListItemService,
@@ -49,10 +43,8 @@ export class DashboardComponent {
 
   ) {}
   ngOnInit(): void {
-    this.fetchCategories(1, 10);
-    this.fetchsiteItems(1, 10);
-    this.fetchCommonSiteItem(1, 10);
-    this.fetchGovSites(1, 10);
+
+    this.fetchGovSites(1, 12);
     this.fetchHotListItem(1,10);
 
     this.fetchHotSearch(1,10);
@@ -64,9 +56,7 @@ export class DashboardComponent {
 
   }
  // Togogle show/off long content
-  toggleLongContent(): void {
-    this.isLongContentHidden = !this.isLongContentHidden;
-  }
+
 
   isTopHidden = false; // Tracks visibility of the top section
 
@@ -87,43 +77,7 @@ export class DashboardComponent {
   }
 
 
-  // Categories
-  fetchCategories(pageId: number, pageSize: number): void {
-    this.categoryService.getCategories(pageId, pageSize).subscribe(
-      (data) => {
-        this.categories = data.categories;
-        console.log("asdfsadfsdfsdfasd")
-      },
-      (error) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
-  }
 
-
-  //  siteItems
-    fetchsiteItems(pageId: number, pageSize : number) :void{
-      this.siteItemService.getsiteItems(pageId, pageSize).subscribe(
-        (data) => {
-          this.siteItems = data.siteItems;
-        },
-        (error) =>{
-          console.error('Error fetching siteItems:', error);
-        }
-      )
-    };
-
-    // commonSiteItem
-    fetchCommonSiteItem(pageId: number, pageSize : number) :void{
-      this.commonSitesService.getCommonSiteItem(pageId, pageSize).subscribe(
-        (data) => {
-          this.commonSiteItems = data.commonSite;
-        },
-        (error) =>{
-          console.error('Error fetching commonSiteItem:', error);
-        }
-      )
-    };
 
   // govSites
   fetchGovSites(pageId: number, pageSize : number) :void{

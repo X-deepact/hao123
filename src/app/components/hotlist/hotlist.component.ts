@@ -13,7 +13,7 @@ export class HotlistComponent {
 
   }
   ngOnInit(): void {
-    this.fetchHotList(1, 10);
+    this.fetchHotList(1, 27);
   }
 
 

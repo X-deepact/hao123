@@ -11,6 +11,7 @@ import { PostcontentComponent } from './components/postcontent/postcontent.compo
 import { SideslideComponent } from './components/sideslide/sideslide.component';
 import { HotlistComponent } from './components/hotlist/hotlist.component';
 import { GamebarComponent } from './components/gamebar/gamebar.component';
+import { SiteitemComponent } from './components/siteitem/siteitem.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GamebarComponent } from './components/gamebar/gamebar.component';
     PostcontentComponent,
     SideslideComponent,
     HotlistComponent,
-    GamebarComponent
+    GamebarComponent,
+    SiteitemComponent
   ],
   imports: [
     BrowserModule,

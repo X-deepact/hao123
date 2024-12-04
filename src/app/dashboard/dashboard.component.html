@@ -186,7 +186,17 @@
       >
         <app-sideslide />
         <ol class="px-2 mt-1 mb-2">
-          <li class="flex space-x-2">
+
+          <ng-container *ngFor="let item of hotListItems">
+            <li class="flex space-x-2">
+              <i class="hgi-stroke hgi-play-circle-02 text-green-500"></i>
+              <a [href]="item.url" class="text-small font-sm hover:underline truncate">
+                {{ item.name }}
+              </a>
+            </li>
+          </ng-container>
+
+          <!-- <li class="flex space-x-2">
             <i class="hgi-stroke hgi-play-circle-02 text-green-500"></i>
             <a href="#" class="text-small font-sm hover:underline truncate"
               > 外交部要求中日双方面免签”</a
@@ -216,7 +226,7 @@
             <a href="#" class="text-small font-sm hover:underline truncate"
               >鹿晗二度直播回应被骂：不管怎么骂都贼开心，曝每天只吃1餐跑10公里</a
             >
-          </li>
+          </li> -->
 
         </ol>
       </div>

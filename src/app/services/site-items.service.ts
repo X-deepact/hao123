@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_URL } from '../constant/constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SiteItemsService {
-  private apiUrl = 'http://localhost:8080/siteItem'; // Backend API URL
+  private apiUrl = API_URL+'/siteItem'; // Backend API URL
 
   constructor(private http: HttpClient) {}
 

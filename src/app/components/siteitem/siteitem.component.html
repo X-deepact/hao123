@@ -10,7 +10,7 @@
       class="flex items-center space-x-2"
     >
       <a
-        class="text-sm font-medium text-gray-700 hover:text-blue-600"
+        class="text-sm  text-gray-700 hover:text-blue-600"
         [href]="item.link"
         target="_blank"
         rel="noopener noreferrer"
@@ -29,7 +29,7 @@
   </div>
 
   <ng-template #noItems>
-    <p>No items available.</p>
+    <p>No items available #siteItems.</p>
   </ng-template>
   <div class="w-full commonSiteItems border-t border-gray-300 my-4"></div>
 
@@ -90,15 +90,20 @@
 <br />
 
 <div
-  id="contentDiv"
+  [ngClass]="{ 'hidden': isLongContentHidden, 'transition-all duration-500 ease-in-out': true }"
   style="background-color: rgb(255, 255, 255); border-color: antiquewhite"
-  class="container mx-auto px-4 bg-purple-200 mb-2 w-full border border-black py-3 hidden"
+  class="container mx-auto px-4 font-light bg-purple-200 mb-2 w-full border border-black py-3"
 >
+
   <table style="width: 100%">
     <tr *ngFor="let category of categories">
-      <td style="color: #0aa770">{{ category.name }}</td>
+      <td style="color: #0aa770">
+       <a href="{{category.url}}" target="_blank">{{ category.name }}</a> </td>
       <td *ngFor="let item of category.items">
         <a [href]="item.url" target="_blank">{{ item.name }}</a>
+      </td>
+      <td>
+        <a href="{{category.url}}" target="_blank">更多>></a>
       </td>
     </tr>
   </table>

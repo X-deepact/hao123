@@ -15,6 +15,7 @@ export class SiteitemComponent {
   commonSiteItems: any[] = [];
   toggleLongContent(): void {
     this.isLongContentHidden = !this.isLongContentHidden;
+    console.log(this.isLongContentHidden);
   }
   constructor(
     private categoryService: CategoryService,
@@ -24,7 +25,7 @@ export class SiteitemComponent {
   ngOnInit(): void {
 
     this.fetchsiteItems(1, 27);
-    this.fetchCategories(1, 10); ///still wrong pagination
+    this.fetchCategories(1, 80); ///still wrong pagination
     this.fetchCommonSiteItem(1, 18);
 
   }
@@ -34,7 +35,6 @@ export class SiteitemComponent {
     this.categoryService.getCategories(pageId, pageSize).subscribe(
       (data) => {
         this.categories = data.categories;
-        console.log("asdfsadfsdfsdfasd")
       },
       (error) => {
         console.error('Error fetching categories:', error);

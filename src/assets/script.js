@@ -51,25 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tabPanels[0].classList.remove("hidden");
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-const showButton = document.getElementById("showButton");
-const hideButton = document.getElementById("hideButton");
-const contentDiv = document.getElementById("contentDiv");
 
-// Show content
-showButton.addEventListener("click", (e) => {
-e.preventDefault();
-contentDiv.classList.remove("hidden");
-showButton.classList.add("hidden");
-});
-
-// Hide content
-hideButton.addEventListener("click", (e) => {
-e.preventDefault();
-contentDiv.classList.add("hidden");
-showButton.classList.remove("hidden");
-});
-});
 
 document.querySelectorAll('.accordion-header').forEach(header => {
     header.addEventListener('click', () => {
@@ -140,19 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-const slider = document.getElementById('slider');
-const slides = slider.children;
-let currentIndex = 0;
-
-document.getElementById('prevBtn').addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-});
-
-document.getElementById('nextBtn').addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % slides.length;
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-});
 
 
 // document.addEventListener("DOMContentLoaded", function () {

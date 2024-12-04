@@ -2,9 +2,10 @@ package api
 
 import (
 	"errors"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
-	"net/http"
 )
 
 type listCategoryRequest struct {
@@ -23,7 +24,7 @@ func (s *Server) getAllCategories(ctx *gin.Context) {
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}
-		if req.PageSize < 3 || req.PageSize > 10 {
+		if req.PageSize < 3 || req.PageSize > 100 {
 
 			err := errors.New("PageSize must be between 3 and 10")
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))

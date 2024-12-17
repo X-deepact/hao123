@@ -1,3 +1,5 @@
+
+
 <div class="fixed right-4 top-2/3 transform -translate-y-1/2 p-2 flex flex-col">
   <div class="mb-2 flex w-full border border-gray-300">
     <img src="assets/icon/game2.png" alt="game" class="w-10 inline-block" />
@@ -11,7 +13,7 @@
   </div>
   <div class="border border-gray-300">
     <img
-      src="assets/icon/d5fecbd5239db7cbc8d7939a75e4d830.png"
+      src="assets/icon/left-side-aa.png"
       alt="game"
       class="w-10 inline-block"
     />
@@ -24,13 +26,13 @@
   </div>
 </div>
 <div
-  class="container flex items-center justify-around mx-auto px-4 my-2 w-full border border-gray-200 p-2"
+  class="container flex items-center justify-between mx-auto px-4 my-1 w-full border border-gray-200 p-2"
 >
   <div *ngIf="govSites && govSites.length; else noData" class="govSites">
     <a *ngFor="let site of govSites">
       <div>
         <a
-          class="govSites"
+          class="govSites truncate"
           style="margin-left: 26px; margin-right: 26px"
           [href]="site.url"
           target="_blank"
@@ -186,11 +188,13 @@
       >
         <app-sideslide />
         <ol class="px-2 mt-1 mb-2">
-
           <ng-container *ngFor="let item of hotListItems">
             <li class="flex space-x-2">
               <i class="hgi-stroke hgi-play-circle-02 text-green-500"></i>
-              <a [href]="item.url" class="text-small font-sm hover:underline truncate">
+              <a
+                [href]="item.url"
+                class="text-small font-sm hover:underline truncate"
+              >
                 {{ item.name }}
               </a>
             </li>
@@ -227,7 +231,6 @@
               >鹿晗二度直播回应被骂：不管怎么骂都贼开心，曝每天只吃1餐跑10公里</a
             >
           </li> -->
-
         </ol>
       </div>
       <div
@@ -318,3 +321,5 @@
     <app-postcontent />
   </div>
 </div>
+
+

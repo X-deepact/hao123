@@ -76,6 +76,7 @@ func (s *Server) setUpRouter() {
 	router.GET("/hotTab", s.getAllHotTabs)
 	router.GET("/topListItems", s.getAllTopListItems)
 	router.GET("/topList", s.getAllTopList)
+	router.GET("/contentList", s.getAllContent)
 	s.router = router
 }
 

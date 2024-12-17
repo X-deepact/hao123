@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createHostSearch(t *testing.T) *HostSearch {
@@ -24,9 +25,9 @@ func createHostSearch(t *testing.T) *HostSearch {
 	return result
 }
 
-func TestAddHostSearch(t *testing.T) {
-	createHostSearch(t)
-}
+// func TestAddHostSearch(t *testing.T) {
+// 	createHostSearch(t)
+// }
 
 func TestGetAllHostSearch(t *testing.T) {
 	insertHostSearch := createHostSearch(t)
@@ -50,7 +51,7 @@ func TestManyHostSearch(t *testing.T) {
 	hotSearches, err := LoadFromFile[HostSearchParams]("../sample-data/hot-search.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load hot searches: %v", err))
 	}
 
 	var dummy []*HostSearchParams

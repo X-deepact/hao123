@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createAddItemCategories(t *testing.T) *ItemCategories {
@@ -22,23 +23,20 @@ func createAddItemCategories(t *testing.T) *ItemCategories {
 	return result
 }
 
-func TestAddItemCategories(t *testing.T) {
-	createAddItemCategories(t)
-}
+// func TestAddItemCategories(t *testing.T) {
+// 	createAddItemCategories(t)
+// }
 
 func TestGetAllItemCategories(t *testing.T) {
-	// Step 1: Add a test category
+
 	insertedCategory := createAddItemCategories(t) // This adds a document using AddItemCategories
 
-	// Step 2: Retrieve all categories
-	filter := bson.M{} // Empty filter to retrieve all documents
+	filter := bson.M{}
 	results, err := testStore.GetAllItemCategories(context.Background(), "itemCategories", filter, 0, 3)
 
-	// Step 3: Assertions
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["name"] == insertedCategory.Name && result["url"] == insertedCategory.URL {
@@ -47,7 +45,7 @@ func TestGetAllItemCategories(t *testing.T) {
 		}
 	}
 
-	require.True(t, found, "Inserted category not found in the results")
+	require.True(t, found, "Inserted item categories not found in the results")
 }
 
 func TestAddManyItemCategories(t *testing.T) {
@@ -56,7 +54,7 @@ func TestAddManyItemCategories(t *testing.T) {
 	itemCategories, err := LoadFromFile[AddCategoryParams]("../sample-data/itemCategories.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load item categories: %v", err))
 	}
 
 	for i := range itemCategories {
@@ -72,7 +70,7 @@ func TestAddManyItemCategories(t *testing.T) {
 	//	db := testStore.GetDatabase()
 	//	require.NotNil(t, db)
 	//
-	//	// Clean up the collection
+	// Clean up the collection
 	//	err = db.Collection("ItemCategories").Drop(context.Background())
 	//	require.NoError(t, err)
 

@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createHotTabs(t *testing.T) *HotListTab {
@@ -24,9 +25,9 @@ func createHotTabs(t *testing.T) *HotListTab {
 	return result
 }
 
-func TestAddHotTab(t *testing.T) {
-	createHotTabs(t)
-}
+// func TestAddHotTab(t *testing.T) {
+// 	createHotTabs(t)
+// }
 
 func TestGetAllHotTab(t *testing.T) {
 	insertHotTab := createHotTabs(t)
@@ -37,7 +38,6 @@ func TestGetAllHotTab(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["url"] == insertHotTab.Url && result["name"] == insertHotTab.Name {

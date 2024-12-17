@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createGovSites(t *testing.T) *GovSites {
@@ -24,9 +25,9 @@ func createGovSites(t *testing.T) *GovSites {
 	return result
 }
 
-func TestAddGovSite(t *testing.T) {
-	createGovSites(t)
-}
+// func TestAddGovSite(t *testing.T) {
+// 	createGovSites(t)
+// }
 
 func TestGetAllGovSites(t *testing.T) {
 	insertGovSites := createGovSites(t)
@@ -36,7 +37,6 @@ func TestGetAllGovSites(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["url"] == insertGovSites.Url && result["name"] == insertGovSites.Name {
@@ -52,7 +52,7 @@ func TestAddManyGovSites(t *testing.T) {
 	govSites, err := LoadFromFile[govSitesParams]("../sample-data/gov-sites.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load many gov sites: %v", err))
 	}
 
 	var dummy []*govSitesParams

@@ -2,9 +2,10 @@ package api
 
 import (
 	"errors"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
-	"net/http"
 )
 
 type topItemListRequest struct {
@@ -23,9 +24,9 @@ func (s *Server) getAllTopListItems(ctx *gin.Context) {
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}
-		if req.PageSize < 5 || req.PageSize > 10 {
+		if req.PageSize < 5 || req.PageSize > 50 {
 
-			err := errors.New("PageSize must be between 3 and 10")
+			err := errors.New("PageSize must be between 3 and 50")
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}

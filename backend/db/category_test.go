@@ -3,20 +3,21 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createAddCategory(t *testing.T) *Category {
 
 	arg := &CategoryParams{
-		Name: "综合1",
-		URL:  "http://www.hao123.com/sitemap1",
+		Name: "综合",
+		URL:  "http://www.hao123.com/sitemap",
 		Items: []CategoryItemParams{
 			{
 				Name:     "高顿教育1",
-				URL:      "https://www.gaodun.com1/",
+				URL:      "https://www.gaodun.com/",
 				Category: func() *string { s := "综合1"; return &s }(),
 			},
 		},
@@ -35,33 +36,28 @@ func createAddCategory(t *testing.T) *Category {
 	return result
 }
 
-func TestAddCategory(t *testing.T) {
-	createAddCategory(t)
-}
+// func TestAddCategory(t *testing.T) {
+// 	createAddCategory(t)
+// }
 
 func TestGetAllCategory(t *testing.T) {
 	insertedCategory := createAddCategory(t)
 
-	filter := bson.M{} // Empty filter to retrieve all documents
-	results, err := testStore.GetAllItemCategories(context.Background(), "categories", filter, 0, 3)
+	filter := bson.M{}
+	results, err := testStore.GetAllCategories(context.Background(), "categories", filter, 0, 3)
 
-	// Step 1: General Assertions
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Step 2: Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["name"] == insertedCategory.Name && result["url"] == insertedCategory.URL {
-			// Step 3: Validate the matched category details
 			require.Equal(t, insertedCategory.Name, result["name"])
 			require.Equal(t, insertedCategory.URL, result["url"])
 
-			// Step 5: Validate items if present
 			if items, ok := result["items"].([]interface{}); ok {
 				require.NotEmpty(t, items)
 
-				// Validate the first item in the array
 				item := items[0].(map[string]interface{})
 				require.Equal(t, insertedCategory.Items[0].Name, item["name"])
 				require.Equal(t, insertedCategory.Items[0].URL, item["url"])
@@ -100,7 +96,6 @@ func TestAddManyCategory(t *testing.T) {
 		require.NotNil(t, inserted.CreatedAt)
 		require.NotNil(t, inserted.UpdatedAt)
 
-		// Validate items within each category, if present
 		if len(dummy[i].Items) > 0 {
 			require.Len(t, inserted.Items, len(dummy[i].Items))
 			for j, item := range inserted.Items {

@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createHotList(t *testing.T) *HotList {
@@ -29,9 +30,9 @@ func createHotList(t *testing.T) *HotList {
 	return result
 }
 
-func TestAddHotList(t *testing.T) {
-	createHotList(t)
-}
+// func TestAddHotList(t *testing.T) {
+// 	createHotList(t)
+// }
 
 func TestGetAllHotLists(t *testing.T) {
 	insertedHotLists := createHotList(t)
@@ -42,7 +43,6 @@ func TestGetAllHotLists(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["url"] == insertedHotLists.URL && result["name"] == insertedHotLists.Name && result["imageLink"] == insertedHotLists.ImageLink {
@@ -51,14 +51,14 @@ func TestGetAllHotLists(t *testing.T) {
 		}
 	}
 
-	require.True(t, found, "Inserted category not found in the results")
+	require.True(t, found, "Inserted hot list not found in the results")
 }
 
 func TestAddManyHotLists(t *testing.T) {
 	hotLists, err := LoadFromFile[hotListParams]("../sample-data/hotlist-items.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load hot lists: %v", err))
 	}
 
 	var dummy []*hotListParams

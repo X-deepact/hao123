@@ -1,8 +1,9 @@
 package db
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type SiteItems struct {
@@ -109,4 +110,16 @@ type TopListItem struct {
 	Name        string             `bson:"name" json:"name"`
 	CreatedAt   *time.Time         `bson:"createdAt" json:"createdAt"`
 	UpdatedAt   *time.Time         `bson:"updatedAt" json:"updatedAt"`
+}
+type MediaItem struct {
+	Title string `bson:"title" json:"title"`
+	URL   string `bson:"url" json:"url"`
+}
+
+type Content struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Video     []MediaItem        `bson:"video" json:"video"`
+	Live      []MediaItem        `bson:"live" json:"live"`
+	CreatedAt *time.Time         `bson:"createdAt,omitempty" json:"createdAt,omitempty"`
+	UpdatedAt *time.Time         `bson:"updatedAt,omitempty" json:"updatedAt,omitempty"`
 }

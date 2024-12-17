@@ -1,0 +1,52 @@
+<div
+  class="flex w-full items-center p-3 transition-colors duration-200 hover:bg-gray-100"
+>
+<div class="image w-[180px] h-[120px] relative" *ngIf="post.image!=''">
+  <a
+    [href]="post.link_url"
+    class="block w-full h-full"
+    target="_blank"
+  >
+    <img
+      [src]="post.image"
+      alt="Sport Image 1"
+      class="w-full h-full object-cover"
+    />
+    <!-- Video Play Icon -->
+    <div
+      *ngIf="post.type === 'video'"
+      class="absolute inset-0 flex items-center justify-center bg-black/30"
+    >
+      <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="w-6 h-6 text-gray-800"
+          viewBox="0 0 16 16"
+        >
+          <path d="M4.25 3.5v9l7-4.5-7-4.5z" />
+        </svg>
+      </div>
+    </div>
+    <!-- Duration Label -->
+    <div
+      *ngIf="post.type === 'video'"
+      class="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-2 py-0.5 rounded"
+    >
+      {{post.screen_duration}}
+    </div>
+  </a>
+</div>
+<div class="flex flex-col ml-5 flex-1">
+  <h2 class="text-lg  font-bold hover:underline">
+   <a [href]="post.link_url" class="truncate"> {{post.title}}</a>
+  </h2>
+  <p *ngIf="post.description" class="text-sm text-gray-700">
+    {{post.description}}
+  </p>
+  <div class="flex space-x-3">
+    <a [href]="post.author_url" class="text-sm text-gray-600 hover:underline">{{post.author}}</a>
+    <p class="text-sm text-gray-600">{{post.total_view}}</p>
+  </div>
+</div>
+</div>

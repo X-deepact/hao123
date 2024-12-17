@@ -1,0 +1,21 @@
+.line-item::before {
+  content: "●"; /* Unicode for a solid circle */
+  font-size: 0.6rem; /* Slightly smaller size for the circle */
+  color: #b0b0b0; /* Lighter gray color */
+  margin-right: 0.5rem; /* Space between the circle and the text */
+  display: inline-block; /* Ensures proper vertical alignment */
+  vertical-align: middle; /* Aligns the circle with the text */
+}
+.mainSearchInput {
+  position: relative;
+}
+.mainSearchInput::placeholder {
+  color: #a1a1a1;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.mainSearchInput.fade::placeholder {
+  opacity: 0;
+  transform: translateY(-10px);
+}

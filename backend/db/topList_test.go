@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createTopList(t *testing.T) *TopList {
@@ -23,9 +24,9 @@ func createTopList(t *testing.T) *TopList {
 	return result
 }
 
-func TestAddTopList(t *testing.T) {
-	createTopList(t)
-}
+// func TestAddTopList(t *testing.T) {
+// 	createTopList(t)
+// }
 
 func TestGetAllTopList(t *testing.T) {
 	insertTopList := createTopList(t)
@@ -43,14 +44,14 @@ func TestGetAllTopList(t *testing.T) {
 		}
 	}
 
-	require.True(t, found, "Inserted insertHotTab not found in the results")
+	require.True(t, found, "Inserted top list not found in the results")
 }
 
 func TestAddManyTopList(t *testing.T) {
 	topList, err := LoadFromFile[topListParams]("../sample-data/top-list.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load top lists: %v", err))
 	}
 
 	var dummy []*topListParams

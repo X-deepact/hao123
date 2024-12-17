@@ -26,16 +26,10 @@ func TestMain(m *testing.M) {
 		}
 	}()
 
-	queries := NewMongoQueries(connect.Database)       // Pass only the database
-	testStore = NewMongoStore(connect.Client, queries) // Initialize test store
+	queries := NewMongoQueries(connect.Database)
+	testStore = NewMongoStore(connect.Client, queries)
 
 	code := m.Run()
-
-	// Clean up the test database
-	//err = connect.Database.Drop(context.Background())
-	//if err != nil {
-	//	log.Printf("Failed to clean up test database: %v", err)
-	//}
 
 	os.Exit(code)
 }

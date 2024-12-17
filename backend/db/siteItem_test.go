@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createSiteItem(t *testing.T) *SiteItems {
@@ -26,23 +27,20 @@ func createSiteItem(t *testing.T) *SiteItems {
 	return result
 }
 
-func TestAddSiteItem(t *testing.T) {
-	createSiteItem(t)
-}
+// func TestAddSiteItem(t *testing.T) {
+// 	createSiteItem(t)
+// }
 
 func TestGetAllSiteItem(t *testing.T) {
-	// Step 1: Add a test category
-	insertedCategory := createSiteItem(t) // This adds a document using AddItemCategories
 
-	// Step 2: Retrieve all categories
-	filter := bson.M{} // Empty filter to retrieve all documents
+	insertedCategory := createSiteItem(t)
+
+	filter := bson.M{}
 	results, err := testStore.GetAllSiteItem(context.Background(), "siteItem", filter, 0, 3)
 
-	// Step 3: Assertions
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["name"] == insertedCategory.Name && result["icon"] == insertedCategory.Icon && result["link"] == insertedCategory.Link {
@@ -51,14 +49,14 @@ func TestGetAllSiteItem(t *testing.T) {
 		}
 	}
 
-	require.True(t, found, "Inserted category not found in the results")
+	require.True(t, found, "Inserted site Item not found in the results")
 }
 
 func TestAddManySiteItem(t *testing.T) {
 	siteItems, err := LoadFromFile[siteItemsParams]("../sample-data/site-items.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load site item: %v", err))
 	}
 
 	var dummy []*siteItemsParams

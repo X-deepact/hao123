@@ -1,0 +1,40 @@
+<div class="relative w-full h-full overflow-hidden border rounded-md">
+  <!-- Slides -->
+  <div class="flex transition-transform duration-500" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+    <div class="w-full h-full flex-shrink-0 relative" *ngFor="let slide of slides">
+      <img [src]="slide.image" alt="Slide" class="w-full h-full object-cover">
+      <!-- Caption & Button -->
+      <div class="absolute bottom-0 left-0 right-0 bg-black/30 flex flex-col justify-center items-center text-white text-center p-4">
+        <h2 class="text-3xl font-bold mb-4">{{ slide.caption }}</h2>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          {{ slide.buttonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prev & Next Buttons -->
+  <button
+    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-3 hover:bg-gray-700"
+    (click)="prevSlide()"
+  >
+    &#10094;
+  </button>
+  <button
+    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-3 hover:bg-gray-700"
+    (click)="nextSlide()"
+  >
+    &#10095;
+  </button>
+
+  <!-- Dots -->
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <div
+      *ngFor="let slide of slides; let i = index"
+      class="w-3 h-3 rounded-full cursor-pointer"
+      [class.bg-white]="i === currentSlide"
+      [class.bg-gray-400]="i !== currentSlide"
+      (click)="goToSlide(i)"
+    ></div>
+  </div>
+</div>

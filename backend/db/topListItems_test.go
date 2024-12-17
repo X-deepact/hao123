@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createTopListItems(t *testing.T) *TopListItem {
@@ -25,9 +26,9 @@ func createTopListItems(t *testing.T) *TopListItem {
 	return result
 }
 
-func TestAddTopListItem(t *testing.T) {
-	createTopListItems(t)
-}
+// func TestAddTopListItem(t *testing.T) {
+// 	createTopListItems(t)
+// }
 
 func TestGetAllTopListItems(t *testing.T) {
 	insertTopListItems := createTopListItems(t)
@@ -46,10 +47,10 @@ func TestGetAllTopListItems(t *testing.T) {
 		}
 	}
 
-	require.True(t, found, "Inserted insertHotTab not found in the results")
+	require.True(t, found, "Inserted insert top lists item not found in the results")
 }
 
-func TestGetTopListItem(t *testing.T) {
+func TestAddManyTopListItem(t *testing.T) {
 	topListItem, err := LoadFromFile[topListItemParams]("../sample-data/top-list-items.json")
 
 	if err != nil {

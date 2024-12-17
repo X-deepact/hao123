@@ -1,38 +1,64 @@
-export const feedTitles = [
+import { ContentTabItem } from "../types/content-tab-item";
+
+export const feedTitles : ContentTabItem[] = [
   {
-    "name": "推荐"
+    id: 1,
+    name: "推荐",
+    en_name: "recommend"
   },
   {
-    "name": "视频"
+    id: 2,
+    name: "视频",
+    en_name: "video"
   },
   {
-    "name": "汽车"
+    id: 3,
+    name: "汽车",
+    en_name: "car"
   },
   {
-    "name": "游戏"
+    id: 4,
+    name: "游戏",
+    en_name: "game"
   },
   {
-    "name": "直播"
+    id: 5,
+    name: "直播",
+    en_name: "live"
   },
   {
-    "name": "体育"
+    id: 6,
+    name: "体育",
+    en_name: "sports"
   },
   {
-    "name": "娱乐"
+    id: 7,
+    name: "娱乐",
+    en_name: "entertainment"
   },
   {
-    "name": "科技"
+    id: 8,
+    name: "科技",
+    en_name: "technology"
   },
   {
-    "name": "财经"
+    id: 9,
+    name: "财经",
+    en_name: "finance"
   },
   {
-    "name": "女性"
+    id: 10,
+    name: "女性",
+    en_name: "women"
   },
   {
-    "name": "历史"
+    id: 11,
+    name: "历史",
+    en_name: "history"
   },
   {
-    "name": "时尚"
+    id: 12,
+    name: "时尚",
+    en_name: "fashion"
   }
 ]

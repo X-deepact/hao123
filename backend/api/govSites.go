@@ -27,7 +27,7 @@ func (s *Server) getAllGovSites(ctx *gin.Context) {
 		}
 		if req.PageSize < 3 || req.PageSize > 20 {
 
-			err := errors.New("PageSize must be between 3 and 10")
+			err := errors.New("PageSize must be between 3 and 20")
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}

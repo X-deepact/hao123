@@ -3,15 +3,16 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createCommonSite(t *testing.T) *CommonSite {
 	arg := &commonSiteParams{
-		Name: "网易云音乐",
-		Url:  "https://music.163.com",
+		Name: "网易云音乐1",
+		Url:  "https://music.163.com1",
 		Icon: "",
 	}
 
@@ -25,9 +26,9 @@ func createCommonSite(t *testing.T) *CommonSite {
 	return result
 }
 
-func TestAddCommonSite(t *testing.T) {
-	createCommonSite(t)
-}
+// func TestAddCommonSite(t *testing.T) {
+// 	createCommonSite(t)
+// }
 
 func TestGetAllCommonSite(t *testing.T) {
 	insertedCommonSite := createCommonSite(t)
@@ -42,8 +43,7 @@ func TestGetAllCommonSite(t *testing.T) {
 	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
-		fmt.Println("1", result["url"])
-		fmt.Println("2", insertedCommonSite.Url)
+
 		if result["name"] == insertedCommonSite.Name && result["url"] == insertedCommonSite.Url {
 			found = true
 			break
@@ -57,7 +57,7 @@ func TestAddMannyCommonSite(t *testing.T) {
 	commonSite, err := LoadFromFile[commonSiteParams]("../sample-data/common-site.json")
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load common sites: %v", err))
 	}
 
 	var dummy []*commonSiteParams

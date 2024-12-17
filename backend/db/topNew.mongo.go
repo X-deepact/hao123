@@ -4,11 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"time"
 )
 
 type feedTopNewsParams struct {
@@ -23,6 +24,7 @@ func (mq *MongoQueries) GetAllTopNews(ctx context.Context, collectionName string
 	}
 	var results []bson.M
 
+	fmt.Println("kkt", skip, limit)
 	err := mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
 		findOptions := options.Find().SetSkip(skip).SetLimit(limit)
 		cursor, err := collection.Find(ctx, filter, findOptions)

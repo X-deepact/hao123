@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 func createTopNews(t *testing.T) *FeedTopNew {
@@ -25,22 +26,19 @@ func createTopNews(t *testing.T) *FeedTopNew {
 	return result
 }
 
-func TestAddTopNews(t *testing.T) {
-	createTopNews(t)
-}
+// func TestAddTopNews(t *testing.T) {
+// 	createTopNews(t)
+// }
 
 func TestGetAllTopNews(t *testing.T) {
-	insertedTopNews := createTopNews(t) // This adds a document using AddItemCategories
+	insertedTopNews := createTopNews(t)
 
-	// Step 2: Retrieve all categories
-	filter := bson.M{} // Empty filter to retrieve all documents
+	filter := bson.M{}
 	results, err := testStore.GetAllTopNews(context.Background(), "topNews", filter, 0, 3)
 
-	// Step 3: Assertions
 	require.NoError(t, err)
 	require.NotEmpty(t, results)
 
-	// Ensure at least one result matches the inserted category
 	var found bool
 	for _, result := range results {
 		if result["url"] == insertedTopNews.Url && result["name"] == insertedTopNews.Name && result["feedTitle"] == insertedTopNews.FeedTitle {
@@ -49,13 +47,13 @@ func TestGetAllTopNews(t *testing.T) {
 		}
 	}
 
-	require.True(t, found, "Inserted category not found in the results")
+	require.True(t, found, "Inserted top news found in the results")
 }
 
 func TestAddManyTopNews(t *testing.T) {
 	topNews, err := LoadFromFile[feedTopNewsParams]("../sample-data/feed-top-news.json")
 	if err != nil {
-		panic(fmt.Sprintf("Failed to load categories: %v", err))
+		panic(fmt.Sprintf("Failed to load top news: %v", err))
 	}
 
 	var dummy []*feedTopNewsParams

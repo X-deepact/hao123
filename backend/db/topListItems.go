@@ -4,11 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"time"
 )
 
 type topListItemParams struct {
@@ -24,7 +25,6 @@ func (mq *MongoQueries) GetAllTopListItem(ctx context.Context, collectionName st
 	var results []bson.M
 
 	err := mq.ExecuteQuery(ctx, collectionName, func(collection *mongo.Collection) error {
-
 		findOptions := options.Find().SetSkip(skip).SetLimit(limit)
 		cursor, err := collection.Find(ctx, filter, findOptions)
 		if err != nil {

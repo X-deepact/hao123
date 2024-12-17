@@ -25,7 +25,7 @@ func (s *Server) getAllHotList(ctx *gin.Context) {
 		}
 		if req.PageSize < 3 || req.PageSize > 50 {
 
-			err := errors.New("PageSize must be between 3 and 10")
+			err := errors.New("PageSize must be between 3 and 50")
 			ctx.JSON(http.StatusBadRequest, errorResponse(err))
 			return
 		}
